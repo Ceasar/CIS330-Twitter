@@ -10,7 +10,7 @@
 function run_sql($query) {
 	$dbUsername="root";
 	$dbPassword="";
-	$database="lamp_newlamp";
+	$database="default";
 	
 	$connection = mysql_connect("localhost",$dbUsername,$dbPassword);
 	mysql_select_db($database) or die( "Unable to select database");
