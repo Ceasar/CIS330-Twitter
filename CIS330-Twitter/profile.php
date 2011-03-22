@@ -131,8 +131,8 @@ function followButton() {
 	<!-- This makes the title display the username if the client is logged in -->
 	<title>Twitter - News Feed
 		<?php
-			if ( isset($_SESSION['username']) ) {
-				echo " - " . $_SESSION['username'];
+			if ( isset($_GET['id']) ) {
+				echo " - " . $_GET['id'];
 			}
 		?>
 	</title>
