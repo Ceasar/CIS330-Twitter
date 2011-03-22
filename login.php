@@ -49,9 +49,9 @@ function auth_check_login($email, $password) {
 //TODO: I'm not sure if this is the best way to do this(?)
 function login_success(){
 	echo "Welcome " . $_SESSION['firstname'] . " " . $_SESSION['lastname'] . "</br>";
-	echo "<a href=\"/profile.php\">Go to Profile</a></br>";
-	echo "<a href=\"/profile.php\">Go to Control Panel</a></br>";
-	echo "<a href=\"/logout.php\">Log out</a></br>";
+	echo "<a href=\"./profile.php\">Go to Profile</a></br>";
+	echo "<a href=\"./profile.php\">Go to Control Panel</a></br>";
+	echo "<a href=\"./logout.php\">Log out</a></br>";
 }
 
 //Displays options after a login failure
@@ -59,7 +59,7 @@ function login_success(){
 function login_failure(){
 	echo "Login Failed.";
 	echo "<p align=\"center\">Need an Account?<br>
-			<a href=\"/accountCreation.php\">Register Here!</a></p>";
+			<a href=\"./accountCreation.php\">Register Here!</a></p>";
 }
 ?>
 
@@ -93,7 +93,7 @@ function login_failure(){
 	</p>
 	<br>
 		<p align=center>
-			<a href="../index.php">Return to index</a>
+			<a href="./index.php">Return to index</a>
 		</p>
 </body>
 </html>

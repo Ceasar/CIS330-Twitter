@@ -23,14 +23,14 @@ session_start();
 		//if user is already logged in
 			if (isset($_SESSION['userid'])){
 		?>
-				Welcome back! | <a href="/logout.php">Log out?</a>
+				Welcome back! | <a href="./logout.php">Log out?</a>
 		<?php
 			}
 		//if user is NOT already logged in
 			else{
 		?>
 				<!-- LOGIN FORM -->
-				<form name="twitterlogin" method="post" action="/login.php">
+				<form name="twitterlogin" method="post" action="./login.php">
 					<table class="apps_table" align=right>
 						<tr>
 							<td>Username: </td>
@@ -50,7 +50,7 @@ session_start();
 		</tr>
 		<tr>
 			<!-- ACCOUNT REGISTRATION LINK. -->
-			<td align="center"><a href="/accountCreation.php">New User Registration</a></td>
+			<td align="center"><a href="./accountCreation.php">New User Registration</a></td>
 		</tr>
 	</table>
 	<p>NOTE: For testing purposes, input username: test@test.com , password: test</p>

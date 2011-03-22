@@ -6,7 +6,7 @@ if(!isset($_SESSION)) {session_start();}
  */
 ?>
 <title>Penn Twitter</title>
-<link rel="stylesheet" type="text/css" href="../styles.css">
+<link rel="stylesheet" type="text/css" href="./styles.css">
 
 <body>
 	<br> 
@@ -23,6 +23,6 @@ if(!isset($_SESSION)) {session_start();}
 		?>
 		</p>
 		<br>
-		<p><a href="../index.php">Return to index</a></p>
+		<p><a href="./index.php">Return to index</a></p>
 	</div>
 </body>

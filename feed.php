@@ -26,6 +26,7 @@ function displayNewsFeed() {
 <html>
 
 <head>
+	<link rel="stylesheet" type="text/css" href="./styles.css">
 	<!-- This makes the title display the username if the client is logged in -->
 	<title>Twitter - News Feed
 		<?php
