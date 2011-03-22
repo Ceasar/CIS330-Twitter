@@ -22,23 +22,72 @@ function run_sql($query) {
 	return $result;
 }
 
-
-
-/*
-function run_sql($query) {
-	$dbUsername="cpdpn_dailypenn";
-  $dbPassword="l;asdb8a";
-  $database="dpn_writ35";
+//Runs multiple sql queries on the same connection and returns an array of their results
+function run_statements($queries) {
+	//Auth Vars.
+	$dbUsername="root";
+	$dbPassword="";
+	$database="default";
 	
-	$connection = mysql_connect('localhost',$dbUsername,$dbPassword);
+	//Connect to the db
+	$connection = mysql_connect("localhost",$dbUsername,$dbPassword);
 	mysql_select_db($database) or die( "Unable to select database");
-	if (!($result = mysql_query($query, $connection))) {
-	  echo ("<b>SQL Error:</b> ".mysql_error() ."<br>Query: " . $query);
-		exit(1);
+	
+	//Run all of the queries on the same connection and collate the results
+	$results = array();
+	foreach ($queries as $query) {
+		$result =  mysql_query($query, $connection);
+		if (!$result) {
+		  echo ("<b>SQL Error:</b> ".mysql_error() ."<br>Query: " . $query);
+			exit(1);
+		}
+		//Append the results
+		$results[] = $result;
 	}
+	
 	mysql_close();
-	return $result;
+	return $results;
 }
-*/
+
+
+//****************
+// Helper Queries
+//****************
+/* Place queries here that retrieve/write useful stuff to the db
+ * such as adding tweets, getting all tweets for a particular 
+ * user, etc.
+ */
+
+
+/* Actually facilitates submitting tweets to the db.
+ * Args: $user - the username (id)
+ *       $message - the message text
+ *       $private - whether the message should be private
+ * Returns: Boolean whether the tweet was successfully added.
+ */
+function db_addTweet($user, $message, $private=false) {
+	//Validate input (Just length for now...)
+	if ( strlen($_POST['message'])>140 ) {
+		return false;
+	} 
+	
+	//Build the queries for the database
+	
+	//This creates a new tweet (The two queries need to run on the same coneection for LAS_INSERT_ID() to work)
+	$queries = array();
+	$queries[] = "INSERT INTO tweets(private, message)"
+			.    "VALUES(". ($private?"TRUE":"FALSE") .",'". addslashes($_POST['message']) ."')";
+	$queries[] = "INSERT INTO tweeted(tID, userID)"
+			.    "VALUES(LAST_INSERT_ID(),'". addslashes($user) ."')";
+	$results = run_statements($queries);
+	
+	//Make sure the insert succeeded
+	if (!$results[0]||!$results[1]) {
+		return false;
+	}
+	
+	//If we get here, everything worked
+	return true;
+}
 
 ?>
