@@ -113,7 +113,6 @@ function db_addUser($user, $first, $last, $email, $private, $lang, $bio, $locati
     }
     
     return true;
-    
 }
 
 

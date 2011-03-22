@@ -7,7 +7,7 @@ function newAccountWidget() {
         $result = addUser();
         if(!$result) {
             echo "Account creation was unsuccessful.";
-            //createAccountForm();
+            createAccountForm();
         }
         else {
             echo "Account creation was successful.";
