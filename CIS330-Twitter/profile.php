@@ -21,6 +21,7 @@ $last_name = $user['last_name'];
 $location = $user['location'];
 $bio = $user['bio'];
 $url = $user['URL'];
+$followers = getFollowers();
 
 function displayUserProfile() {
 	global $first_name, $last_name, $location, $bio, $url;
@@ -33,10 +34,11 @@ function displayUserProfile() {
 }
 
 function displayNewsFeed() {
+	global $id;
 	//Query the db for all tweets/PMs related to the current user
 	$query = "SELECT users.id as usr, tweets.message as msg\n"
 		   . "FROM users, tweeted, tweets\n"
-		   . "WHERE users.id=tweeted.userid and tweeted.tid=tweets.id";
+		   . "WHERE users.id=". $id ." and users.id=tweeted.userid and tweeted.tid=tweets.id";
 	$result = run_sql($query);
 	//Loop through the set of tweets
 	while ( $row=mysql_fetch_array($result) ) {
@@ -44,7 +46,7 @@ function displayNewsFeed() {
 	}
 }
 
-function displayFollowers() {
+function getFollowers() {
 	global $id;
 	//Query the db for followers of the profiled user
 	$query = "SELECT * "
@@ -52,9 +54,19 @@ function displayFollowers() {
 		   . "WHERE followee=".$id." and users.id=follower";
 	$result = run_sql($query);
 	//Loop through the set of followers
-	while ( $user=mysql_fetch_array($result) ) {
-		$first_name = $user['first_name'];
-		$last_name = $user['last_name'];
+	$followers = array();
+	while ( $follower=mysql_fetch_array($result) ) {
+		$followers[] = $follower;
+	}
+	return $followers;
+}
+
+function displayFollowers() {
+	global $followers;
+	//Loop through the set of followers
+	foreach ($followers as $follower) {
+		$first_name = $follower['first_name'];
+		$last_name = $follower['last_name'];
 		$full_name = $first_name." ".$last_name;
 		echo "<li>@". $full_name ."</li>";
 	}
@@ -85,17 +97,27 @@ function createPostForm() {
 }
 
 function followButton() {
+	global $followers;
 	//See if the user is even logged in
 	if ( !isset($_SESSION['username']) ) {
 		echo "You must be logged in to post tweets.<br/>";
 	} else {
+		//Check to see if we are already following the person.
+		if (count($followers) != 0){
+			if (in_array($_SESSION['id'], $followers[0])){
+			?>Following<?php
+			return;
+			}
+		}
+		
+		//Update DB or show a follow button.
 		if (isset($_POST['follow'])) {
 			$user = $_SESSION['id'];
 			$person = $_GET['id'];
 			db_addFollower($user, $person)
 			?>Following<?php
 		} else {
-			//If we haven't submitted, display an new blank form
+			//If we aren't following then create a follow button.
 			createPostForm();
 		}
 	}
@@ -126,7 +148,7 @@ function followButton() {
 		<div id="main-content">
 			<div id="userProfile">
 				<ul id="userProfile">
-					<!-- This function populates the newsfeed list with elements from the db -->
+					<!-- This function shows the user profile. -->
 					<?php displayUserProfile(); ?>
 				</ul>
 			</div>
@@ -137,7 +159,7 @@ function followButton() {
 				<h2>Timeline:</h2>
 				<ul id="newsList">
 					<!-- This function populates the newsfeed list with elements from the db -->
-					<?php //displayNewsFeed(); ?>
+					<?php displayNewsFeed(); ?>
 				</ul>
 			</div>
 		</div>
@@ -146,16 +168,16 @@ function followButton() {
 			<div id="newsFeed">
 				<h2>Followers:</h2>
 				<ul id="newsList">
-					<!-- This function populates the newsfeed list with elements from the db -->
-					<?php //displayFollowers(); ?>
+					<!-- This function populates the followers list. -->
+					<?php displayFollowers(); ?>
 				</ul>
 			</div>
 			
 			<div id="newsFeed">
 				<h2>Following:</h2>
 				<ul id="newsList">
-					<!-- This function populates the newsfeed list with elements from the db -->
-					<?php //displayFollowing(); ?>
+					<!-- This function populates the following list. -->
+					<?php displayFollowing(); ?>
 				</ul>
 			</div>
 		</div>
