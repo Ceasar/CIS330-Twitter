@@ -1,0 +1,23 @@
+#content{
+	min-width: 1000px;
+	max-width: 1120px;
+	padding-top: 60px;
+	margin: 0 auto 0 auto;
+}
+
+#main-content{
+	width: 540px;
+	float: left;
+	display: inline-block;
+	z-index: 4;
+	position: relative;
+	background: white;
+	height: 100%;
+}
+
+#dashboard{
+	min-width: 340px;
+	position: relative;
+	background: #F9F9F9;
+	padding: 12px 20px;
+}
