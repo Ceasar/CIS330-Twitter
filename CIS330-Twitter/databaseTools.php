@@ -73,7 +73,7 @@ function db_addTweet($user, $message, $private=false) {
 	
 	//Build the queries for the database
 	
-	//This creates a new tweet (The two queries need to run on the same coneection for LAS_INSERT_ID() to work)
+	//This creates a new tweet (The two queries need to run on the same connection for LAS_INSERT_ID() to work)
 	$queries = array();
 	$queries[] = "INSERT INTO tweets(private, message)"
 			.    "VALUES(". ($private?"TRUE":"FALSE") .",'". addslashes($_POST['message']) ."')";
@@ -83,6 +83,29 @@ function db_addTweet($user, $message, $private=false) {
 	
 	//Make sure the insert succeeded
 	if (!$results[0]||!$results[1]) {
+		return false;
+	}
+	
+	//If we get here, everything worked
+	return true;
+}
+
+/* Facilitates follower requests to the db.
+ * Args: $user - the username (id)
+ *       $person - the message text
+ * Returns: Boolean whether the tweet was successfully added.
+ */
+function db_addFollower($user, $person) {
+	//Build the queries for the database
+	
+	//This creates a new tweet (The two queries need to run on the same connection for LAS_INSERT_ID() to work)
+	$queries = array();
+	$queries[] = "INSERT INTO follows(follower, followee)"
+			.    "VALUES(". $user .",'". $person ."')";
+	$results = run_statements($queries);
+	
+	//Make sure the insert succeeded
+	if (!$results[0]) {
 		return false;
 	}
 	
