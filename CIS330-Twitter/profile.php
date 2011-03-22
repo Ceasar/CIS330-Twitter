@@ -12,7 +12,7 @@ $_SESSION['username'] = "userA";
 //Query the db for the user
 $query = "SELECT * "
 	   . "FROM users "
-	   . "WHERE users.id='".$_SESSION['id']."'";
+	   . "WHERE users.id='".$_GET['id']."'";
 $result = run_sql($query);
 $user = mysql_fetch_array($result);
 $id = $user['ID'];
