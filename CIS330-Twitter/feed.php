@@ -5,6 +5,22 @@ include_once("./newTweetWidget.php");
 
 //DEBUG
 $_SESSION['username'] = "userA"; //Fake a session
+
+//Page-specific
+//-------------
+
+function displayNewsFeed() {
+	//Query the db for all tweets/PMs related to the current user
+	$query = "SELECT users.id as usr, tweets.message as msg\n"
+		   . "FROM users, tweeted, tweets\n"
+		   . "WHERE users.id=tweeted.userid and tweeted.tid=tweets.id";
+	$result = run_sql($query);
+	//Loop through the set of tweets
+	while ( $row=mysql_fetch_array($result) ) {
+		echo "<li>@". $row['usr'] ." tweeted ". $row['msg'] ."</li>";
+	}
+}
+
 ?>
 
 <html>
@@ -30,17 +46,8 @@ $_SESSION['username'] = "userA"; //Fake a session
 		<div id="newsFeed">
 			<h2>News Feed:</h2>
 			<ul id="newsList">
-				<?php
-					//Query the db for all tweets/PMs related to the current user
-					$query = "SELECT users.id as usr, tweets.message as msg\n"
-						   . "FROM users, tweeted, tweets\n"
-						   . "WHERE users.id=tweeted.userid and tweeted.tid=tweets.id";
-					$result = run_sql($query);
-					//Loop through the set of tweets
-					while ( $row=mysql_fetch_array($result) ) {
-						echo "<li>@". $row['usr'] ." tweeted ". $row['msg'] ."</li>";
-					}
-				?>
+				<!-- This function populates the newsfeed list with elements from the db -->
+				<?php displayNewsFeed(); ?>
 			</ul>
 		</div>
 		
