@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2011 at 01:44 AM
+-- Generation Time: Mar 22, 2011 at 01:12 AM
 -- Server version: 5.5.10
 -- PHP Version: 5.3.6
 
@@ -155,8 +155,19 @@ CREATE TABLE IF NOT EXISTS `tweeted` (
 -- Dumping data for table `tweeted`
 --
 
-UPDATE `tweeted` SET `TID` = 1,`userID` = 'userA' WHERE `tweeted`.`TID` = 1 AND `tweeted`.`userID` = 'userA';
-UPDATE `tweeted` SET `TID` = 2,`userID` = 'userB' WHERE `tweeted`.`TID` = 2 AND `tweeted`.`userID` = 'userB';
+INSERT INTO `tweeted` (`TID`, `userID`) VALUES
+(1, 'userA'),
+(4, 'userA'),
+(11, 'UserA'),
+(13, 'userA'),
+(14, 'userA'),
+(15, 'userA'),
+(16, 'userA'),
+(17, 'userA'),
+(18, 'userA'),
+(19, 'userA'),
+(2, 'userB'),
+(5, 'userB');
 
 -- --------------------------------------------------------
 
@@ -165,18 +176,35 @@ UPDATE `tweeted` SET `TID` = 2,`userID` = 'userB' WHERE `tweeted`.`TID` = 2 AND 
 --
 
 CREATE TABLE IF NOT EXISTS `tweets` (
-  `ID` int(11) NOT NULL,
-  `private` char(50) DEFAULT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `private` tinyint(1) NOT NULL DEFAULT '0',
   `message` char(140) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`ID`),
+  KEY `ID` (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `tweets`
 --
 
-UPDATE `tweets` SET `ID` = 1,`private` = NULL,`message` = 'hi there!' WHERE `tweets`.`ID` = 1;
-UPDATE `tweets` SET `ID` = 2,`private` = NULL,`message` = 'Sup d00d?' WHERE `tweets`.`ID` = 2;
+INSERT INTO `tweets` (`ID`, `private`, `message`) VALUES
+(1, 0, 'hi there!'),
+(2, 0, 'Sup d00d?'),
+(4, 0, 'hello!'),
+(5, 1, 'hey man'),
+(6, 0, 'whats up?dds'),
+(7, 0, 'hwdwd'),
+(8, 0, 'hdwcs'),
+(9, 0, 'hello world\r\n!'),
+(11, 0, 'Hello WORLDSzzz!'),
+(12, 0, 'NewONE!'),
+(13, 0, 'wsadsadpppppppp'),
+(14, 0, 'all'),
+(15, 0, 'hows it goin?'),
+(16, 0, 'my tweet?\r\n'),
+(17, 0, 'new tewaets?\r\n'),
+(18, 0, 'posting da tweats\r\nstuff'),
+(19, 0, 'hello!');
 
 -- --------------------------------------------------------
 
@@ -202,8 +230,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-UPDATE `users` SET `ID` = 'userA',`first_name` = 'john',`last_name` = 'doe',`email` = NULL,`private` = NULL,`lang` = NULL,`bio` = NULL,`location` = NULL,`URL` = NULL,`birthday` = NULL WHERE `users`.`ID` = 'userA';
-UPDATE `users` SET `ID` = 'userB',`first_name` = 'jake',`last_name` = 'jakerson',`email` = NULL,`private` = NULL,`lang` = NULL,`bio` = NULL,`location` = NULL,`URL` = NULL,`birthday` = NULL WHERE `users`.`ID` = 'userB';
+INSERT INTO `users` (`ID`, `first_name`, `last_name`, `email`, `private`, `lang`, `bio`, `location`, `URL`, `birthday`) VALUES
+('userA', 'john', 'doe', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('userB', 'jake', 'jakerson', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Constraints for dumped tables
