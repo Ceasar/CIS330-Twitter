@@ -90,6 +90,7 @@ function db_addTweet($user, $message, $private=false) {
 	return true;
 }
 
+<<<<<<< HEAD
 /* Facilitates follower requests to the db.
  * Args: $user - the username (id)
  *       $person - the message text
@@ -113,4 +114,32 @@ function db_addFollower($user, $person) {
 	return true;
 }
 
+=======
+/* Adds the user to the database
+ * Args: $user - username (id)
+ *       $first - first name
+ *       $last - last name
+ *       $email - e-mail address
+ *       $private - privacy setting
+ *       $lang - language
+ *       $bio - bio
+ *       $location - location
+ *       $url - website
+ *       $birthday - date (YYYY-MM-DD)
+ * Returns: Boolean whether user was successfully added
+ */
+function db_addUser($user, $first, $last, $email, $private, $lang, $bio, $location, $url, $birthday) {
+    $query = "INSERT INTO Users " . 
+             "VALUES ($user, $first, $last, $email, $private, $lang, $bio, $location, $url, $birthday)";
+    $result = run_sql($query);
+    
+    if (!$result){
+        return false;
+    }
+    
+    return true;
+}
+
+
+>>>>>>> dd4bd2f48ea745b8eb6a5e7caee803133f598b86
 ?>
