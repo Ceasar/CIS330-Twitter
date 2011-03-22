@@ -16,17 +16,17 @@ $query = "SELECT * "
 $result = run_sql($query);
 $user = mysql_fetch_array($result);
 $id = $user['ID'];
-$first_name = $user['first_name'];
-$last_name = $user['last_name'];
+$first = $user['first_name'];
+$last = $user['last_name'];
 $location = $user['location'];
 $bio = $user['bio'];
 $url = $user['URL'];
 $followers = getFollowers();
 
 function displayUserProfile() {
-	global $first_name, $last_name, $location, $bio, $url;
+	global $first, $last, $location, $bio, $url;
 	?>
-	<h2><?php echo $first_name." ".$last_name; ?></h2>
+	<h2><?php echo $first." ".$last; ?></h2>
 	<span>Location: <?php echo $location;?></span>
 	<p>Bio: <?php echo $bio;?></p>
 	<p>URL: <a href="<?php echo $url;?>"/><?php echo $url;?></a></p>

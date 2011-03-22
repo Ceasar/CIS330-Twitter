@@ -137,4 +137,31 @@ function db_addUser($user, $first, $last, $email, $private, $lang, $bio, $locati
     
     return true;
 }
+
+/* Update a user's information in the database
+ * Args: $id - username (id)
+ *       $first - first name
+ *       $last - last name
+ *       $email - e-mail address
+ *       $private - privacy setting
+ *       $lang - language
+ *       $bio - bio
+ *       $location - location
+ *       $url - website
+ *       $birthday - date (YYYY-MM-DD)
+ * Returns: Boolean whether user was successfully added
+ */
+function db_updateUser($id, $first, $last, $email, $private, $lang, $bio, $location, $url, $birthday) {
+    $query = "UPDATE users " . 
+             "SET first_name='".$first."', last_name='".$last."', email='".$email."', private='".$private."',".
+			 "lang='".$lang."', bio='".$bio."', location='".$location."', url='".$url."', birthday='".$birthday."'" .
+			 "WHERE users.id='".$id."'";
+    $result = run_sql($query);
+    
+    if (!$result){
+        return false;
+    }
+    
+    return true;
+}
 ?>
