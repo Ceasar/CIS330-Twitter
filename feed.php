@@ -1,4 +1,8 @@
 <?php
+/* News Feed
+ * ==========
+ */
+
 //Includes:
 include_once("./databaseTools.php");
 include_once("./newTweetWidget.php");
@@ -6,9 +10,8 @@ include_once("./newTweetWidget.php");
 //DEBUG
 $_SESSION['username'] = "userA"; //Fake a session
 
-//Page-specific
-//-------------
-
+//Page-specific Functions
+//-----------------------
 function displayNewsFeed() {
 	//Query the db for all tweets/PMs related to the current user
 	$query = "SELECT users.id as usr, tweets.message as msg\n"
@@ -25,26 +28,16 @@ function displayNewsFeed() {
 
 <html>
 
-<head>
-	<link rel="stylesheet" type="text/css" href="./styles.css">
-	<!-- This makes the title display the username if the client is logged in -->
-	<title>Twitter - News Feed
-		<?php
-			if ( isset($_SESSION['username']) ) {
-				echo " - " . $_SESSION['username'];
-			}
-		?>
-	</title>
-</head>
+<?php include_once("./assets/templates/head.php");?>
 
 <body>
-	<div id="header">
-		<h1>Twitter Project</h1>
-	</div>
+
+<?php include_once("./assets/templates/header.php");?>
+
+<!-- Unique page content goes here. -->
+<div id="content">
 	
-	<div id="content">
-	
-		<div id="newsFeed">
+	<div id="newsFeed">
 			<h2>News Feed:</h2>
 			<ul id="newsList">
 				<!-- This function populates the newsfeed list with elements from the db -->
@@ -54,8 +47,12 @@ function displayNewsFeed() {
 		
 		<!--  This draws a widget for submitting tweets. Exposed by 'newTweetWidget.php' -->
 		<?php addTweetWidget(); ?>
-		 
 	</div>
-</body>
+	
+</div> <!-- End Content Div -->
 
+
+<?php include_once("./assets/templates/footer.php");?>
+
+</body>
 </html>

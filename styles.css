@@ -1,9 +1,23 @@
+/* =================
+ *  General Styles
+ * =================
+ */
+
+ h2 {
+	font-size: 14;
+	margin: 3px 3px;
+ }
+ 
+/* With the template, we can probably remove this...
+ * I just commented out #content because it 
+ * conflicts with the new templating system
 #content{
 	min-width: 1000px;
 	max-width: 1120px;
 	padding-top: 60px;
 	margin: 0 auto 0 auto;
 }
+*/
 
 #main-content{
 	width: 540px;
@@ -21,3 +35,104 @@
 	background: #F9F9F9;
 	padding: 12px 20px;
 }
+
+
+/* =================
+ *  Template Styles
+ * =================
+ */
+#header, #content, #footer {
+	margin: 0 auto 0 auto;
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-top-style: none;
+	width: 1000px;
+	background: #F9F9F9;
+	align: center;
+}
+
+#header {
+	border-top-style: solid;
+	background: #E9E9F9;
+	min-height: 100px;
+}
+
+#header:after {
+	clear: both;
+
+}
+
+#headLogo {
+	width: 100px;
+	height: 100px;
+	border: 1px solid #ccc;
+	float:left;
+	margin-right: 10px;
+}
+
+#header h1 {
+	font-size: 16pt;
+	margin-bottom: 0px;
+}
+
+/* Formatting for the nav bar */
+ul#navContainer {
+	float:left;
+	padding: 0;
+	list-style: none;
+	width: 800px;
+}
+
+ul#navContainer li {
+	width: 100%;
+	height: 100%;
+	display:inline;
+}
+
+ul#navContainer li a {
+	text-decoration: none;
+	text-align: center;
+	width: 100px;
+	padding: 5px 2px;
+	background: #bbb;
+	color: #000;
+	border: 1px solid #666;
+	border-left-style: none;
+	float:left;
+}
+
+ul#navContainer li:first-child a {
+	border-left-style: solid; 
+}
+
+#content {
+	min-height: 200px;
+	/*text-align: center;*/
+	/*Hmm...*/
+}
+
+#footer {
+	text-align: center;
+	font-size: 12px;
+	background: #E9E9F9;
+}
+#footer a {
+	text-decoration: none;
+}
+
+
+/* =================
+ *  feed.php Styles
+ * =================
+ */
+ul#newsList {
+	list-style: none;
+	border: 1px solid #ccc;
+	width: 300px;
+	margin: 5px 0;
+}
+
+ul#newsList li {
+	width:100%;
+}
+
