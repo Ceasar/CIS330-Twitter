@@ -11,9 +11,21 @@ session_start(); //Get the session variabbles for the user (If any...)
 //-------------
 
 //Query the db for the user
+
+//Make sure we have a user to display the profile of.
+$q; //The userid whose profile to display
+if ( isset($_GET['id']) ) {
+	$q = $_GET['id'];
+} else if ( isset($_SESSION['userid']) ) {
+	$q = $_SESSION['userid'];
+} else {
+	echo "Invalid username or user not logged in!";
+	return;
+}
+
 $query = "SELECT * "
 	   . "FROM users "
-	   . "WHERE users.id='".$_GET['id']."'";
+	   . "WHERE users.id='".$q."'";
 $result = run_sql($query);
 $user = mysql_fetch_array($result);
 $id = $user['ID'];
@@ -151,7 +163,7 @@ function followButton() {
 <!-- Unique page content goes here. -->
 <div id="content">
 	<div id="leftCol">
-		<div id="userProfile">
+		<div class="infoPane">
 			<h2>User Profile:</h2>
 			<!-- This function shows the user profile. -->
 			<?php displayUserProfile(); ?>
@@ -159,7 +171,7 @@ function followButton() {
 		
 		<?php followButton();?>
 	
-		<div id="newsFeed">
+		<div class="infoPane">
 			<h2>Timeline:</h2>
 			<ul id="newsList">
 				<!-- This function populates the newsfeed list with elements from the db -->
@@ -169,7 +181,7 @@ function followButton() {
 	</div>
 		
 	<div id="rightCol">
-		<div id="newsFeed">
+		<div class="infoPane">
 			<h2>Followers:</h2>
 			<ul id="newsList">
 				<!-- This function populates the followers list. -->
@@ -177,7 +189,7 @@ function followButton() {
 			</ul>
 		</div>
 		
-		<div id="newsFeed">
+		<div class="infoPane">
 			<h2>Following:</h2>
 			<ul id="newsList">
 				<!-- This function populates the following list. -->

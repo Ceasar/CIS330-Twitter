@@ -26,18 +26,18 @@ function addTweetWidget() {
 		//The page self-submits so if it submitted, try to post the tweet
 		$tweetDefault = "Write your tweet here. (Max 140 characters)";
 		if (isset($_POST['submit'])) {
-			$result = submitTweet();
+			$result = NT_submitTweet();
 			//If the user input was bad (e.g. too long), allow them to fix it 
 			if (!$result) {
-				createPostForm($_POST['message'], false);
+				NT_createPostForm($_POST['message'], false);
 				echo "Tweet was too long, try again. (max of 140 characters)<br/>";
 			} else {
 				//If it submitted correctly, display a new blank form
-				createPostForm($tweetDefault);
+				NT_createPostForm($tweetDefault);
 			}
 		} else {
 			//If we haven't submitted, display a new blank form
-			createPostForm($tweetDefault);
+			NT_createPostForm($tweetDefault);
 		}
 	}
 	
@@ -47,7 +47,7 @@ function addTweetWidget() {
 
 //This draws the form element for the widget. The argument determines the initial content.
 //------
-function createPostForm($text, $default=true) {
+function NT_createPostForm($text, $default=true) {
 	?>
 	<form method="post" action="<?php $PHP_SELF;?>">
 		<textarea rows="10" cols="30" name="message" onClick="clearText(event)" onKeyDown="changeText(event)"><?php echo $text ?></textarea><br/>
@@ -71,7 +71,7 @@ function createPostForm($text, $default=true) {
 
 // Attempts to submit the result of the form submission. Returns: Bool whether or not the input was valid
 //------
-function submitTweet() {
+function NT_submitTweet() {
 	//Get the submitted values
 	$msg = $_POST['message'];
 	$usr = ($_SESSION['userid']);

@@ -8,7 +8,7 @@
 	<ul id="navContainer">
 		<!-- If the user is logged in show him the site navigation. Otherwise just allow them to login or create an account -->
 		<?php if ( isset($_SESSION['userid']) ) { ?>
-			<li><a href="./profile.php?id=<?php echo $_SESSION['userid'] ?>"/>Home</a></li>
+			<li><a href="./profile.php"/>Home</a></li>
 			<li><a href="./feed.php">News Feed</a></li>
 			<li><a href="./usercp.php">User CP</a></li>
 			<li><a href="./logout.php">Logout</a></li>

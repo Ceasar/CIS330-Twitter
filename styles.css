@@ -112,6 +112,21 @@ ul#navContainer li:first-child a {
 	/*Hmm...*/
 }
 
+.infoPane {
+	background: #C3D5F6;
+	border: 1px solid #aaa;
+	padding: 3px;
+	margin: 5px;
+	margin-top: 0;
+}
+
+.infoPane h2 {
+	margin: 0;
+	margin-left: -2px;
+	width: 100%;
+	border-bottom: 1px solid #aaa;
+}
+
 /* Formatting for two-column content areas */
 #leftCol {
 	float: left;
@@ -123,7 +138,7 @@ ul#navContainer li:first-child a {
 #rightCol {
 	float: left;
 	width: auto;
-	padding: 0 3px;
+	padding: 3px 3px;
 }
 
 #footer {
@@ -141,6 +156,7 @@ ul#navContainer li:first-child a {
  * =================
  */
 ul#newsList {
+	background: #F9F9F9;
 	list-style: none;
 	border: 1px solid #ccc;
 	min-height: 100px;
