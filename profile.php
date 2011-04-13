@@ -67,10 +67,13 @@ function displayFollowers() {
 	global $followers;
 	//Loop through the set of followers
 	foreach ($followers as $follower) {
+		/*
 		$first_name = $follower['first_name'];
 		$last_name = $follower['last_name'];
 		$full_name = $first_name." ".$last_name;
 		echo "<li><a href='./profile.php?id=".$follower['ID']."'>@".$full_name."</a></li>";
+		*/
+		echo "<li><a href='./profile.php?id=".$follower['ID']."'>@".$follower['ID']."</a></li>";
 	}
 }
 
@@ -83,10 +86,13 @@ function displayFollowing() {
 	$result = run_sql($query);
 	//Loop through the set of followers
 	while ( $user=mysql_fetch_array($result) ) {
+		/*
 		$first_name = $user['first_name'];
 		$last_name = $user['last_name'];
 		$full_name = $first_name." ".$last_name;
 		echo "<li><a href='./profile.php?id=".$user['ID']."'>@".$full_name."</a></li>";
+		*/
+		echo "<li><a href='./profile.php?id=".$user['ID']."'>@".$user['ID']."</a></li>";
 	}
 }
 
