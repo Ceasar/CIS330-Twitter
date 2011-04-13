@@ -28,7 +28,7 @@ function displayNewsFeed() {
 	$result = run_sql($query);
 	//Loop through the set of tweets
 	while ( $row=mysql_fetch_array($result) ) {
-			echo "<li>@". $row['usr'] ." tweeted ". $row['msg'] ."</li>";
+			echo "<li><a href='./profile.php?id=" . $row['usr'] . "'>@". $row['usr'] ."</a> tweeted ". $row['msg'] ."</li>";
 	}
 }
 
@@ -51,14 +51,7 @@ function displayNewsFeed() {
 				
 				<!-- This function populates the newsfeed list with elements from the db -->
 				
-				<?php 
-					//If the page just self-submitted, we gotta update the tweets
-					if (isset($_POST['submit'])) {
-						//Clear the tweet timeline
-						echo "<script document.getElementById('newsList').innerHTML='' </script>";
-					}
-					displayNewsFeed();
-				?>
+				<?php displayNewsFeed(); ?>
 			</ul>
 		</div>
 		

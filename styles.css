@@ -17,7 +17,6 @@
 	padding-top: 60px;
 	margin: 0 auto 0 auto;
 }
-*/
 
 #main-content{
 	width: 540px;
@@ -35,7 +34,7 @@
 	background: #F9F9F9;
 	padding: 12px 20px;
 }
-
+*/
 
 /* =================
  *  Template Styles
@@ -107,8 +106,24 @@ ul#navContainer li:first-child a {
 
 #content {
 	min-height: 200px;
+	overflow: auto; /* This is to prevent float collapse */
+	
 	/*text-align: center;*/
 	/*Hmm...*/
+}
+
+/* Formatting for two-column content areas */
+#leftCol {
+	float: left;
+	width: 50%;
+	padding: 3px 3px;
+	border-right: 1px solid #CCC;
+}
+
+#rightCol {
+	float: left;
+	width: auto;
+	padding: 0 3px;
 }
 
 #footer {
@@ -128,8 +143,10 @@ ul#navContainer li:first-child a {
 ul#newsList {
 	list-style: none;
 	border: 1px solid #ccc;
+	min-height: 100px;
 	width: 300px;
 	margin: 5px 0;
+	padding: 2px;
 }
 
 ul#newsList li {

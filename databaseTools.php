@@ -101,7 +101,7 @@ function db_addFollower($user, $person) {
 	//This creates a new tweet (The two queries need to run on the same connection for LAS_INSERT_ID() to work)
 	$queries = array();
 	$queries[] = "INSERT INTO follows(follower, followee)"
-			.    "VALUES(". $user .",'". $person ."')";
+			.    "VALUES('". $user ."','". $person ."')";
 	$results = run_statements($queries);
 	
 	//Make sure the insert succeeded
