@@ -8,7 +8,7 @@
 
 //Includes:
 include_once("./databaseTools.php");
-
+session_start(); //Get the session variabbles for the user (If any...)
 ?>
 
 <html>

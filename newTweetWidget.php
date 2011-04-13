@@ -20,7 +20,7 @@ function addTweetWidget() {
 	<?php
 	
 	//See if the user is even logged in
-	if ( !isset($_SESSION['username']) ) {
+	if ( !isset($_SESSION['userid']) ) {
 		echo "You must be logged in to post tweets.<br/>";
 	} else {
 		//The page self-submits so if it submitted, try to post the tweet
@@ -32,11 +32,11 @@ function addTweetWidget() {
 				createPostForm($_POST['message'], false);
 				echo "Tweet was too long, try again. (max of 140 characters)<br/>";
 			} else {
-				//If it submitted correctly, display an new blank form
+				//If it submitted correctly, display a new blank form
 				createPostForm($tweetDefault);
 			}
 		} else {
-			//If we haven't submitted, display an new blank form
+			//If we haven't submitted, display a new blank form
 			createPostForm($tweetDefault);
 		}
 	}
@@ -74,7 +74,7 @@ function createPostForm($text, $default=true) {
 function submitTweet() {
 	//Get the submitted values
 	$msg = $_POST['message'];
-	$usr = ($_SESSION['username']);
+	$usr = ($_SESSION['userid']);
 	
 	//Determine privacy setting from checkbox
 	$priv = false;
@@ -88,6 +88,13 @@ function submitTweet() {
 		echo "@".$usr." ".($priv?"privately":"")." tweeted '".$msg."'<br/>";
 	}
 	return $result;
+	
+	//Update any news feeds on the page
+	?>
+	<script type="text/javascript">
+	
+	</script>
+	<?php
 }
 
 ?>
