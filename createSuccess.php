@@ -48,7 +48,7 @@ function addUser() {
 
 <body>
 
-<?php include_once("./assets/templates/header.php;?>
+<?php include_once("./assets/templates/header.php");?>
 
 <!-- Unique page content goes here. -->
 <div id="content">
