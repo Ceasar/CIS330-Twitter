@@ -18,7 +18,7 @@
  //Runs an SQL query.
 function run_sql($query) {
 	$dbUsername = "root";
-	$dbPassword = "";
+	$dbPassword = "root";
 	$database = "default";
 	
 	$connection = mysql_connect("localhost", $dbUsername, $dbPassword);
