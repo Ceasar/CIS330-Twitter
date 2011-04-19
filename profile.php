@@ -30,7 +30,7 @@ function displayUserProfile() {
 	<?php
 }
 
-function displayNewsFeed() {
+function displayUserFeed() {
 	global $id;
 	$tweets = db_getUserTweets($id);
 	//Loop through the set of tweets
@@ -149,7 +149,7 @@ function followButton() {
 				<ul id="newsList">
 					<!-- This function populates the newsfeed list with elements 
 from the db -->
-					<?php displayNewsFeed(); ?>
+					<?php displayUserFeed(); ?>
 				</ul>
 			</div>
 		</div>
