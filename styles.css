@@ -46,6 +46,8 @@
 	padding: 5px;
 	border: 1px solid #ccc;
 	border-top-style: none;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
 	width: 1000px;
 	background: #F9F9F9;
 	align: center;
@@ -53,7 +55,7 @@
 
 #header {
 	border-top-style: solid;
-	background: #E9E9F9;
+	background: #5077ff;
 	min-height: 100px;
 }
 
@@ -63,9 +65,11 @@
 }
 
 #headLogo {
-	width: 100px;
+	width: 300px;
 	height: 100px;
 	border: 1px solid #ccc;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
 	float:left;
 	margin-right: 10px;
 }
@@ -80,7 +84,7 @@ ul#navContainer {
 	float:left;
 	padding: 0;
 	list-style: none;
-	width: 800px;
+	width: 650px;
 }
 
 ul#navContainer li {
@@ -94,15 +98,16 @@ ul#navContainer li a {
 	text-align: center;
 	width: 100px;
 	padding: 5px 2px;
-	background: #bbb;
+	background: #4eedff;
 	color: #000;
 	border: 1px solid #666;
-	border-left-style: none;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 	float:left;
 }
 
 ul#navContainer li:first-child a {
-	border-left-style: solid; 
+	/*border-left-style: solid; */
 }
 
 #content {
