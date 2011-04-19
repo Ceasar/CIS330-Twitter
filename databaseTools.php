@@ -187,7 +187,7 @@ function db_getFollowerIds($id) {
 	//Query the db for followers of the profiled user
 	$query = "SELECT users.id "
 		   . "FROM users, follows "
-		   . "WHERE followee=".$id." and users.id=follower";
+		   . "WHERE followee='$id' and users.id=follower";
 	$result = run_sql($query);
 	$followers = to_array($result);
 	return $followers;
