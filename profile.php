@@ -52,11 +52,11 @@ function displayFollowers() {
 
 function displayFollowing() {
 	global $id;
-	$result = db_getFollowing($id);
+	$following = db_getFollowing($id);
 	//Loop through the set of following
-	while ( $user=mysql_fetch_array($result) ) {
-		$first_name = $user['first_name'];
-		$last_name = $user['last_name'];
+	foreach ($following as $followed) {
+		$first_name = $followed['first_name'];
+		$last_name = $followed['last_name'];
 		$full_name = $first_name." ".$last_name;
 		echo "<li>@". $full_name ."</li>";
 	}
