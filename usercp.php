@@ -1,5 +1,6 @@
 <?php
 //Includes:
+session_start();
 include_once("./databaseTools.php");
 
 //DEBUG
