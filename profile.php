@@ -6,8 +6,8 @@ include_once("./databaseTools.php");
 //-------------
 
 //DEBUG
-$_SESSION['id'] = 3; //Fake a session
-$_SESSION['username'] = "userA";
+//$_SESSION['id'] = 3; //Fake a session
+//$_SESSION['username'] = "userA";
 
 //Query the db for the user
 $user = db_getUserById($_GET['id']);
