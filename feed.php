@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 /* News Feed
  * ==========
  */
@@ -9,7 +9,7 @@ include_once("./databaseTools.php");
 include_once("./newTweetWidget.php");
 
 //DEBUG
-//$_SESSION['username'] = "userA"; //Fake a session
+$_SESSION['username'] = "userA"; //Fake a session
 
 
 //Page-specific Functions
