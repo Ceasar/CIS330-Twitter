@@ -103,6 +103,16 @@ function db_addTweet($user, $message, $private=false) {
 	return true;
 }
 
+//Query the db for all tweets/PMs related to the current user
+function db_getUserTweets($id) {
+	$query = "SELECT users.id as usr, tweets.message as msg\n"
+		   . "FROM users, tweeted, tweets\n"
+		   . "WHERE users.id=". $id ." and users.id=tweeted.userid and 
+tweeted.tid=tweets.id";
+	$result = run_sql($query);
+	return $result
+}
+
 /* Facilitates follower requests to the db.
  * Args: $id - the user id
  * Returns: A list of followers.

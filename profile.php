@@ -36,14 +36,9 @@ function displayUserProfile() {
 
 function displayNewsFeed() {
 	global $id;
-	//Query the db for all tweets/PMs related to the current user
-	$query = "SELECT users.id as usr, tweets.message as msg\n"
-		   . "FROM users, tweeted, tweets\n"
-		   . "WHERE users.id=". $id ." and users.id=tweeted.userid and 
-tweeted.tid=tweets.id";
-	$result = run_sql($query);
+	$tweets = db_getUserTweets($id);
 	//Loop through the set of tweets
-	while ( $row=mysql_fetch_array($result) ) {
+	while ( $row=mysql_fetch_array($tweets) ) {
 		echo "<li>@". $row['usr'] ." tweeted ". $row['msg'] ."</li>";
 	}
 }
