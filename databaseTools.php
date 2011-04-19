@@ -138,8 +138,8 @@ function db_addFollower($user, $person) {
  * Returns: Boolean whether user was successfully added
  */
 function db_addUser($user, $password, $first, $last, $email, $private, $lang, $bio, $location, $url, $birthday) {
-    $query = "INSERT INTO Users " . 
-             "VALUES ($user, $password, $first, $last, $email, $private, $lang, $bio, $location, $url, $birthday)";
+    $query = "INSERT INTO users(ID, password, first_name, last_name, email, private, lang, bio, location, URL, birthday) " . 
+             "VALUES ('".$user."', '".$password."', '".$first."', '".$last."', '".$email."', '".$private."', '".$lang."', '".$bio."', '".$location."', '".$url."', '".$birthday."')";
     $result = run_sql($query);
     
     if (!$result){
