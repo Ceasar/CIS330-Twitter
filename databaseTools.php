@@ -58,12 +58,15 @@ function run_statements($queries) {
  * user, etc.
  */
 
-/* Executes a search. For now, searches by last name.
+/* Executes a search. Searches by user's ID or lastname.
  * Args: $searchtext - desired search (last name)
  * Returns: array of users matching query
  */
 function db_searchForUser($searchtext){
-	$query = "SELECT first_name, last_name FROM users WHERE last_name LIKE '%" . $searchtext . "%'";
+	$query = "SELECT id, first_name, last_name "
+				."FROM users "
+				."WHERE last_name LIKE '%" . $searchtext . "%'"
+				."or ID LIKE '%" . $searchtext . "%'";
 	$results = run_sql($query);
 	return $results;
 	
@@ -125,7 +128,6 @@ function db_addFollower($user, $person) {
 
 /* Adds the user to the database
  * Args: $user - username (id)
- *	 $password - password
  *       $first - first name
  *       $last - last name
  *       $email - e-mail address
@@ -137,9 +139,9 @@ function db_addFollower($user, $person) {
  *       $birthday - date (YYYY-MM-DD)
  * Returns: Boolean whether user was successfully added
  */
-function db_addUser($user, $password, $first, $last, $email, $private, $lang, $bio, $location, $url, $birthday) {
-    $query = "INSERT INTO users(ID, password, first_name, last_name, email, private, lang, bio, location, URL, birthday) " . 
-             "VALUES ('".$user."', '".$password."', '".$first."', '".$last."', '".$email."', '".$private."', '".$lang."', '".$bio."', '".$location."', '".$url."', '".$birthday."')";
+function db_addUser($user, $first, $last, $email, $private, $lang, $bio, $location, $url, $birthday) {
+    $query = "INSERT INTO Users " . 
+             "VALUES ($user, $first, $last, $email, $private, $lang, $bio, $location, $url, $birthday)";
     $result = run_sql($query);
     
     if (!$result){
