@@ -69,7 +69,7 @@ function execute_retweet($uid, $tweet_id){
 	//Loop through the set of tweets (will only be one in this case)
 	while ($row=mysql_fetch_array($result) ) {
 		$orig_usr = $row['usr'];
-		$msg = "retweet:" . $row['usr'] . $row['msg'] ;
+		$msg = "ReTweet: " . $row['usr'] ." ". $row['msg'] ;
 		db_addTweet($uid, $msg);
 	}
 }

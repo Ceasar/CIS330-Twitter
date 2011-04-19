@@ -18,7 +18,7 @@ function displayPrivateMessages() {
     $result = run_sql($query);
     //Loop through messages
     while( $row=mysql_fetch_array($result) ){
-        echo "<li>Message from @". $row['usr'] .": ". $row['msg'] ."</li>";
+        echo "<li>Message from <a href=\"./profile.php?id=" . $row['usr'] . "\">@" . $row['usr']. "</a>: ". $row['msg'] ."</li>";
     }
 }
 
