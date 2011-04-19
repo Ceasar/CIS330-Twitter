@@ -121,6 +121,15 @@ function db_getUserById($id) {
 	return mysql_fetch_array($result);
 }
 
+//Gets a list by its id
+function db_getListById($id) {
+	$query = "SELECT * "
+	   . "FROM lists "
+	   . "WHERE lists.id='".$id."'";
+	$result = run_sql($query);
+	return mysql_fetch_array($result);
+}
+
 //Query the db for all tweets/PMs related to the current user
 function db_getUserTweets($id) {
 	$query = "SELECT users.id as usr, tweets.message as msg\n"
