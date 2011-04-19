@@ -10,6 +10,7 @@ include_once("./databaseTools.php");
 //-------------
 
 //Query the db for the user
+if (isset($_SESSION['id'])){
 $query = "SELECT * "
 	   . "FROM users "
 	   . "WHERE users.id='".$_SESSION['id']."'";
@@ -25,6 +26,7 @@ $bio = $user['bio'];
 $location = $user['location'];
 $url = $user['URL'];
 $location = $user['birthday'];
+}
 
 function editAccountWidget() {
 	global $first, $last, $email, $private, $lang, $bio, $location, $url, $birthday;
@@ -91,15 +93,13 @@ function editForm($first, $last, $email, $private, $lang, $bio, $location, $url,
 ?>
 
 <html>
-
+<?php include_once("./assets/templates/head.php");?>
 <head>
     <title>User CP</title>
 </head>
 
 <body>
-    <div id="header">
-        <h1>Twitter Project</h1>
-    </div>
+    <?php include_once("./assets/templates/header.php");?>
     
     <div id="content">
     
@@ -110,6 +110,8 @@ function editForm($first, $last, $email, $private, $lang, $bio, $location, $url,
             ?>
         </div>
     </div>
+	
+	<?php include_once("./assets/templates/footer.php");?>
 </body>
 
 </html>
