@@ -9,7 +9,7 @@ function logout(){?>
 	<div align=center>
 		<p>
 		<?php
-		if (isset($_SESSION['userid'])) {
+		if (isset($_SESSION['id'])) {
 			
 			session_destroy();
 			echo "You have sucessfully logged out.";

@@ -125,7 +125,7 @@ function db_getUserById($id) {
 function db_getUserTweets($id) {
 	$query = "SELECT users.id as usr, tweets.message as msg\n"
 		   . "FROM users, tweeted, tweets\n"
-		   . "WHERE users.id=". $id ." and users.id=tweeted.userid and 
+		   . "WHERE users.id='$id' and users.id=tweeted.userid and 
 tweeted.tid=tweets.id";
 	$result = run_sql($query);
 	$tweets = to_array($result);
@@ -140,7 +140,7 @@ function db_getFollowers($id) {
 	//Query the db for followers of the profiled user
 	$query = "SELECT * "
 		   . "FROM users, follows "
-		   . "WHERE followee=".$id." and users.id=follower";
+		   . "WHERE followee='$id' and users.id=follower";
 	$result = run_sql($query);
 	$followers = to_array($result);
 	return $followers;
@@ -168,7 +168,7 @@ function db_getFollowing($id) {
 	//Query the db for followers of the profiled user
 	$query = "SELECT * "
 		   . "FROM users, follows "
-		   . "WHERE follower=".$id." and users.id=followee";
+		   . "WHERE follower='$id' and users.id=followee";
 	$result = run_sql($query);
 	$following = to_array($result);
 	return $following;
@@ -191,7 +191,7 @@ function db_addFollower($user, $person) {
 	//This creates a new tweet (The two queries need to run on the same connection for LAS_INSERT_ID() to work)
 	$queries = array();
 	$queries[] = "INSERT INTO follows(follower, approved, followee)"
-			.    "VALUES(". $user .",". $approved .",". $person .")";
+			.    "VALUES('$user','$approved','$person')";
 	$results = run_statements($queries);
 	
 	//Make sure the insert succeeded
@@ -206,7 +206,7 @@ function db_addFollower($user, $person) {
 function db_getUnapprovedFollowers($id){
 	$query = "SELECT * "
 		   . "FROM users, follows "
-		   . "WHERE followee=".$id." and users.id=follower and approved='0'";
+		   . "WHERE followee='$id' and users.id=follower and approved='0'";
 	$result = run_sql($query);
 	$unapproved = to_array($result);
 	return $unapproved;
@@ -277,7 +277,7 @@ function db_updateUser($id, $first, $last, $email, $private, $lang, $bio, $locat
     $query = "UPDATE users " . 
              "SET first_name='".$first."', last_name='".$last."', email='".$email."', private='".$private."',".
 			 "lang='".$lang."', bio='".$bio."', location='".$location."', url='".$url."', birthday='".$birthday."'" .
-			 "WHERE users.id='".$id."'";
+			 "WHERE users.id='$id'";
     $result = run_sql($query);
     
     if (!$result){
