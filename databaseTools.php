@@ -148,6 +148,20 @@ function db_getFollowers($id) {
 
 /* Facilitates follower requests to the db.
  * Args: $id - the user id
+ * Returns: A list of ids.
+ */
+function db_getFollowerIds($id) {
+	//Query the db for followers of the profiled user
+	$query = "SELECT users.id "
+		   . "FROM users, follows "
+		   . "WHERE followee=".$id." and users.id=follower";
+	$result = run_sql($query);
+	$followers = to_array($result);
+	return $followers;
+}
+
+/* Facilitates follower requests to the db.
+ * Args: $id - the user id
  * Returns: A list of people that the user is following.
  */
 function db_getFollowing($id) {
