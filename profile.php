@@ -26,6 +26,7 @@ function displayUserProfile() {
 	$url = $user['URL'];
 	$email = $user['email'];
 	$language = $user['lang'];
+	$birthday = $user['birthday'];
 	?>
 	<h2><?php echo $first." ".$last; ?></h2>
 	<span>Location: <?php echo $location;?></span>
@@ -33,6 +34,7 @@ function displayUserProfile() {
 	<p>URL: <a href="<?php echo $url;?>"/><?php echo $url;?></a></p>
 	<p>Email: <?php echo $email;?></p>
 	<p>Language: <?php echo $language;?></p>
+	<p>Birthday: <?php echo $birthday;?></p>
 	<?php
 }
 
