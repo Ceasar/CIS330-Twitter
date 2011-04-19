@@ -20,7 +20,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for table `favorites`
 --
 
-CREATE TABLE `favorites` (
+CREATE TABLE IF NOT EXISTS `favorites` (
   `uid` char(20) NOT NULL,
   `tid` int(11) NOT NULL,
   PRIMARY KEY (`uid`,`tid`),
@@ -153,14 +153,30 @@ CREATE TABLE IF NOT EXISTS `mentions` (
 
 CREATE TABLE IF NOT EXISTS `messaged` (
   `MID` int(11) NOT NULL,
-  `userID` char(20) NOT NULL,
-  PRIMARY KEY (`MID`,`userID`),
-  KEY `userID` (`userID`)
+  `senderID` char(20) NOT NULL,
+  `receiverID` char(20) NOT NULL,
+  PRIMARY KEY (`MID`,`senderID`,`receiverID`),
+  KEY `senderID` (`senderID`),
+  KEY `receiverID` (`receiverID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `messaged`
 --
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+CREATE TABLE IF NOT EXISTS `messages` (
+  `ID` int(11) NOT NULL,
+  `message` char(140) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `ID` (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
 
 
 -- --------------------------------------------------------
@@ -312,7 +328,8 @@ ALTER TABLE `mentions`
 --
 ALTER TABLE `messaged`
   ADD CONSTRAINT `messaged_ibfk_1` FOREIGN KEY (`MID`) REFERENCES `tweets` (`ID`),
-  ADD CONSTRAINT `messaged_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`ID`);
+  ADD CONSTRAINT `messaged_ibfk_2` FOREIGN KEY (`senderID`) REFERENCES `users` (`ID`),
+  ADD CONSTRAINT `messaged_ibfk_3` FOREIGN KEY (`receiverID`) REFERENCES `users` (`ID`);
 
 --
 -- Constraints for table `tweeted`
