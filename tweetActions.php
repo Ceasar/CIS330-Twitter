@@ -22,18 +22,6 @@ if(isset($_POST['remove_fav_button'])){
 }
 
 function execute_favorite($uid, $tweet_id){
-	/*$query = "SELECT users.id as usr, tweets.message as msg, tweets.id as id\n"
-	 . "FROM users, tweeted, tweets\n"
-	 . "WHERE users.id=tweeted.userid and tweeted.tid='$tweet_id' and tweets.id='$tweet_id'";
-	 $result = run_sql($query);
-
-	 if (!$result){
-		return false;
-		}
-		//Loop through the set of tweets (will only be one in this case)
-		while ($row=mysql_fetch_array($result) ) {
-		echo "<li>@". $row['usr'] ." tweeted ". $row['msg'] ."</li>"; //print tweet*/
-	
 	$query2 = "INSERT INTO favorites "
 	. "VALUES ('$uid', '$tweet_id')";
 	$result2 = run_sql($query2);
@@ -41,8 +29,6 @@ function execute_favorite($uid, $tweet_id){
 		echo "failed";
 		return false;
 	}
-	
-	/*}*/
 	return true;
 }
 

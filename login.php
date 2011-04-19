@@ -85,7 +85,7 @@ function display_login(){
 
 <!-- Unique page content goes here. -->
 <div id="content">
-
+<div class="box" id="login">
 <?php display_login(); 
 //checks if submit button has been pressed
 if(isset($_POST['submit_button'])){
@@ -100,7 +100,7 @@ if(isset($_POST['submit_button'])){
 		echo "login unsuccessful";
 	}
 }?>
-
+</div>
 </div> <!-- End Content Div -->
 
 

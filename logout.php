@@ -7,6 +7,7 @@ session_start();
 
 function logout(){?>
 	<div align=center>
+	<div class="box" id="login">
 		<p>
 		<?php
 		if (isset($_SESSION['id'])) {
@@ -19,8 +20,8 @@ function logout(){?>
 		}
 		?>
 		</p>
-		<br>
 		<p><a href="./index.php">Return to index</a></p>
+	</div>
 	</div>
 <?php }
 ?>

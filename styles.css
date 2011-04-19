@@ -212,3 +212,14 @@ ul#newsList {
 	h1{
 	font-family: "Perpetua";
 	}
+
+#follow{
+	height: 120px;
+}
+
+#login{
+	width: 300px;
+	height: 100px;
+	margin-left:33%;
+	text-align: center;
+}

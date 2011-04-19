@@ -95,7 +95,7 @@ function printFavoriteTweets($id){
 	echo "Total tweets: ".count($tweets);
 	//Loop through the set of tweets
 	foreach ($tweets as $tweet) {
-		echo "<li>@". $first ." tweeted ". $tweet['msg'] ."</li>";
+		echo "<li>@". $tweet['usr']." tweeted ". $tweet['msg'] ."</li>";
 	}
 }
 
@@ -243,13 +243,17 @@ function messageButton() {
 				<h2>followers:</h2>
 				<ul id="newsList">
 					<!-- This function populates the followers list. -->
+					<div class="scrollbox"  id="follow">
 					<?php displayFollowers(); ?>
+					</div>
 				</ul>
 
 				<h2>following:</h2>
 				<ul id="newsList">
 					<!-- This function populates the following list. -->
+					<div class="scrollbox"  id="follow">
 					<?php displayFollowing(); ?>
+					</div>
 				</ul>
 			</div>
 		</div>

@@ -25,8 +25,6 @@ function displayFollowRecs() {
                 . " WHERE users.id <>'$user' AND (users.last_name='$l_name' OR users.location='$loc')";
     $result = run_sql($query);
     
-    
-    
     //Loop through, pick out as necessary
     $counter = 0;
     while($row=mysql_fetch_array($result)){

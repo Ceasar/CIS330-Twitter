@@ -26,7 +26,7 @@ $lang = $user['lang'];
 $bio = $user['bio'];
 $location = $user['location'];
 $url = $user['URL'];
-$location = $user['birthday'];
+$birthday = $user['birthday'];
 }
 
 function editAccountWidget() {
