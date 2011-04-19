@@ -1,5 +1,5 @@
 <?php
-//session_start();
+session_start();
 /* News Feed
  * ==========
  */
@@ -9,20 +9,30 @@ include_once("./databaseTools.php");
 include_once("./newTweetWidget.php");
 
 //DEBUG
-$_SESSION['username'] = "userA"; //Fake a session
-
+//$_SESSION['username'] = "userA"; //Fake a session
+//error reporting
+ini_set('display_errors',1); 
+error_reporting(E_ALL);
 
 //Page-specific Functions
 //-----------------------
 function displayNewsFeed() {
 	//Query the db for all tweets/PMs related to the current user
-	$query = "SELECT users.id as usr, tweets.message as msg\n"
+	$query = "SELECT users.id as usr, tweets.message as msg, tweets.id as id\n"
 		   . "FROM users, tweeted, tweets\n"
 		   . "WHERE users.id=tweeted.userid and tweeted.tid=tweets.id";
 	$result = run_sql($query);
 	//Loop through the set of tweets
 	while ( $row=mysql_fetch_array($result) ) {
-		echo "<li>@". $row['usr'] ." tweeted ". $row['msg'] ."</li>";
+		//print tweet with star if favorite
+		if(is_favorite($row['id'])){
+			echo "<li><img src=\"./assets/images/star.jpeg\">"
+					." @". $row['usr'] ." tweeted ". $row['msg'] ."</li>"; //print tweet
+		}
+		else{
+			echo "<li>@". $row['usr'] ." tweeted ". $row['msg'] ."</li>"; 
+		}
+		displayTweetOptions($row['id']);	//print options for tweet
 	}
 }
 
@@ -39,6 +49,40 @@ function displayUserFeed($id) {
 	}
 }
 
+/*
+ * creates buttons for various tweeting options
+ */
+function displayTweetOptions($tid){
+	$uid = $_SESSION['id'];
+	if(is_favorite($tid)){
+		echo "<form name=\"rem_favorite\" method=\"post\" action=\"tweetActions.php\">"
+		."<input type=hidden name=\"uid\" value=\"$uid\">"
+		."<input type=hidden name=\"tid\" value=\"$tid\">"
+		."<input type=submit name=\"remove_fav_button\" value=\"Remove Fav\">"
+		."<input type=submit name=\"retweet_button\" value=\"ReTweet\"></form>";
+	}
+	else{
+		echo "<form name=\"favorite\" method=\"post\" action=\"tweetActions.php\">"
+		."<input type=hidden name=\"uid\" value=\"$uid\">"
+		."<input type=hidden name=\"tid\" value=\"$tid\">"
+		."<input type=submit name=\"fav_button\" value=\"Fav\">"
+		."<input type=submit name=\"retweet_button\" value=\"ReTweet\"></form>";
+	}
+}
+
+function is_favorite($tid){
+	$uid = $_SESSION['id'];
+
+	$query = "SELECT favorites.uid "
+	. "FROM favorites "
+	. "WHERE favorites.uid = '$uid' AND favorites.tid = '$tid'";
+
+	$results = run_sql($query);
+	if(mysql_num_rows($results)!=0){
+		return true;
+	}
+	return false;
+}
 ?>
 
 <html>
