@@ -8,11 +8,11 @@
 
  //Runs an SQL query.
 function run_sql($query) {
-	$dbUsername="root";
-	$dbPassword="root";
-	$database="default";
+	$dbUsername = "root";
+	$dbPassword = "";
+	$database = "default";
 	
-	$connection = mysql_connect("localhost",$dbUsername,$dbPassword);
+	$connection = mysql_connect("localhost", $dbUsername, $dbPassword);
 	mysql_select_db($database) or die( "Unable to select database");
 	if (!($result = mysql_query($query, $connection))) {
 	  echo ("<b>SQL Error:</b> ".mysql_error() ."<br>Query: " . $query);
@@ -111,7 +111,30 @@ function db_addFollower($user, $person) {
 	//This creates a new tweet (The two queries need to run on the same connection for LAS_INSERT_ID() to work)
 	$queries = array();
 	$queries[] = "INSERT INTO follows(follower, followee)"
-			.    "VALUES(". $user .",'". $person ."')";
+			.    "VALUES(". $user .",". $person .")";
+	$results = run_statements($queries);
+	
+	//Make sure the insert succeeded
+	if (!$results[0]) {
+		return false;
+	}
+	
+	//If we get here, everything worked
+	return true;
+}
+
+/* Facilitates follower requests to the db.
+ * Args: $user - the username (id)
+ *       $person - the message text
+ * Returns: Boolean whether the follower was successfully removed.
+ */
+function db_removeFollower($user, $person) {
+	//Build the queries for the database
+	
+	//This creates a new tweet (The two queries need to run on the same connection for LAS_INSERT_ID() to work)
+	$queries = array();
+	$queries[] = "DELETE FROM follows "
+			.    "WHERE follower='". $user ."' and followee='". $person ."'";
 	$results = run_statements($queries);
 	
 	//Make sure the insert succeeded

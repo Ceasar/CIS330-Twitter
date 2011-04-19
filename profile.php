@@ -2,12 +2,12 @@
 //Includes:
 include_once("./databaseTools.php");
 
-//DEBUG
-$_SESSION['id'] = 0; //Fake a session
-$_SESSION['username'] = "userA";
-
 //Page-specific
 //-------------
+
+//DEBUG
+$_SESSION['id'] = 3; //Fake a session
+$_SESSION['username'] = "userA";
 
 //Query the db for the user
 $query = "SELECT * "
@@ -16,6 +16,7 @@ $query = "SELECT * "
 $result = run_sql($query);
 $user = mysql_fetch_array($result);
 $id = $user['ID'];
+$private = $user['private'];
 $first = $user['first_name'];
 $last = $user['last_name'];
 $location = $user['location'];
@@ -38,7 +39,8 @@ function displayNewsFeed() {
 	//Query the db for all tweets/PMs related to the current user
 	$query = "SELECT users.id as usr, tweets.message as msg\n"
 		   . "FROM users, tweeted, tweets\n"
-		   . "WHERE users.id=". $id ." and users.id=tweeted.userid and tweeted.tid=tweets.id";
+		   . "WHERE users.id=". $id ." and users.id=tweeted.userid and 
+tweeted.tid=tweets.id";
 	$result = run_sql($query);
 	//Loop through the set of tweets
 	while ( $row=mysql_fetch_array($result) ) {
@@ -88,7 +90,7 @@ function displayFollowing() {
 	}
 }
 
-function createPostForm() {
+function createFollowForm() {
 	?>
 	<form method="post" action="<?php $PHP_SELF;?>">
 		<input type="submit" value="Follow" name="follow">
@@ -96,17 +98,36 @@ function createPostForm() {
 	<?php
 }
 
+function createUnfollowForm() {
+	?>
+	<form method="post" action="<?php $PHP_SELF;?>">
+		<input type="submit" value="Unfollow" name="unfollow">
+	</form>
+	<?php
+}
+
 function followButton() {
-	global $followers;
+	global $followers, $first, $last;
 	//See if the user is even logged in
-	if ( !isset($_SESSION['username']) ) {
-		echo "You must be logged in to post tweets.<br/>";
-	} else {
+	if ( isset($_SESSION['username']) ) {
 		//Check to see if we are already following the person.
 		if (count($followers) != 0){
-			if (in_array($_SESSION['id'], $followers[0])){
-			?>Following<?php
-			return;
+			echo "1";
+			if (isset($_POST['unfollow'])) {
+				echo "2";
+				$user = $_SESSION['id'];
+				$person = $_GET['id'];
+				db_removeFollower($user, $person);
+			} else{
+				echo "3";
+				//Loop through the set of followers
+				foreach ($followers as $follower) {
+					if ($follower['ID'] == $_SESSION['id']){
+						echo "UNFOLLOW BUTTON";
+							createUnfollowForm();
+							return;
+					}
+				}
 			}
 		}
 		
@@ -114,11 +135,12 @@ function followButton() {
 		if (isset($_POST['follow'])) {
 			$user = $_SESSION['id'];
 			$person = $_GET['id'];
-			db_addFollower($user, $person)
+			db_addFollower($user, $person);
 			?>Following<?php
 		} else {
 			//If we aren't following then create a follow button.
-			createPostForm();
+			echo "FOLLOW BUTTON";
+			createFollowForm();
 		}
 	}
 }
@@ -158,7 +180,8 @@ function followButton() {
 			<div id="newsFeed">
 				<h2>Timeline:</h2>
 				<ul id="newsList">
-					<!-- This function populates the newsfeed list with elements from the db -->
+					<!-- This function populates the newsfeed list with elements 
+from the db -->
 					<?php displayNewsFeed(); ?>
 				</ul>
 			</div>
