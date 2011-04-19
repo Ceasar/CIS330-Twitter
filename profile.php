@@ -69,6 +69,36 @@ function displayUserTweets() {
 	}
 }
 
+function displayFavoriteTweets() {
+	global $id, $first, $private;
+	if ($private){
+		$fids = db_getFollowerIds($id);
+		$permitted = 0;
+		foreach ($fids as $fid){
+			if ($fid[0] == $_SESSION['id']){
+				$permitted = 1;
+			}
+		}
+		
+		if ($permitted){
+			printFavoriteTweets($id);
+		} else {
+			echo "This user's information is private. Follow them to see their feed.";
+		}
+	} else {
+		printFavoriteTweets($id);
+	}
+}
+
+function printFavoriteTweets($id){
+	$tweets = db_getFavoriteTweets($id);
+	echo "Total tweets: ".count($tweets);
+	//Loop through the set of tweets
+	foreach ($tweets as $tweet) {
+		echo "<li>@". $first ." tweeted ". $tweet['msg'] ."</li>";
+	}
+}
+
 function displayFollowers() {
 	global $followers;
 	echo "Being followed by ".count($followers)." people.";
@@ -179,9 +209,15 @@ function followButton() {
 			<div id="newsFeed">
 				<h2>Timeline:</h2>
 				<ul id="newsList">
-					<!-- This function populates the newsfeed list with elements 
-from the db -->
+					<!-- This function populates the newsfeed list with elements from the db -->
 					<?php displayUserTweets(); ?>
+				</ul>
+			</div>
+			<div id="favorites">
+				<h2>Favorites:</h2>
+				<ul id="newsList">
+					<!-- This function populates the newsfeed list with elements from the db -->
+					<?php displayFavoriteTweets(); ?>
 				</ul>
 			</div>
 		</div>
