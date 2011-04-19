@@ -29,7 +29,7 @@ function addUser() {
     $first = $_POST['first'];
     $last = $_POST['last'];
     $email = $_POST['email'];
-    $priv = $_POST['private'] ? "true" : "false";
+    $priv = $_POST['private'] ? "TRUE" : "FALSE";
     $lang = $_POST['lang'];
     $bio = $_POST['bio'];
     $loc = $_POST['location'];
