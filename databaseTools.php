@@ -18,7 +18,7 @@
  //Runs an SQL query.
 function run_sql($query) {
 	$dbUsername = "root";
-	$dbPassword = "";
+	$dbPassword = "root";
 	$database = "default";
 	
 	$connection = mysql_connect("localhost", $dbUsername, $dbPassword);
@@ -35,7 +35,7 @@ function run_sql($query) {
 function run_statements($queries) {
 	//Auth Vars.
 	$dbUsername="root";
-	$dbPassword="";
+	$dbPassword="root";
 	$database="default";
 	
 	//Connect to the db
@@ -189,27 +189,13 @@ function db_addFollower($user, $person) {
 	return true;
 }
 
-//Gets the ids of unapproved followers.
-function db_getUnapproved($id){
-	$query = "SELECT users.id "
+function db_getUnapprovedFollowers($id){
+	$query = "SELECT * "
 		   . "FROM users, follows "
 		   . "WHERE followee=".$id." and users.id=follower and approved='0'";
 	$result = run_sql($query);
 	$unapproved = to_array($result);
 	return $unapproved;
-}
-
-/* Facilitates follower requests to the db.
- * Args: $id - the id of the approved person
- *       $ud - the id of the approver
- * Returns: Boolean whether the tweet was successfully added.
- */
-function db_approve($id, $uid){
-	$query = "UPDATE follows " . 
-			 "SET approved='1'" .
-			 "WHERE followee=".$uid." and follower=".$id;
-	$result = run_sql($query);
-	return true;
 }
 
 /* Facilitates follower requests to the db.
