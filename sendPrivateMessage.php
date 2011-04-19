@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
 session_start();
+=======
+session_start()
+>>>>>>> 74ebab00f207d42f93b676a59a25e3890ce87ae2
 /* Send private message page
  *
  */
