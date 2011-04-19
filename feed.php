@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 /* News Feed
  * ==========
  */
@@ -9,7 +9,7 @@ include_once("./databaseTools.php");
 include_once("./newTweetWidget.php");
 
 //DEBUG
-//$_SESSION['username'] = "userA"; //Fake a session
+$_SESSION['username'] = "userA"; //Fake a session
 //error reporting
 ini_set('display_errors',1); 
 error_reporting(E_ALL);
@@ -30,7 +30,7 @@ function displayNewsFeed() {
 					." @". $row['usr'] ." tweeted ". $row['msg'] ."</li>"; //print tweet
 		}
 		else{
-			echo "<li>@". $row['usr'] ." tweeted ". $row['msg'] ."</li>"; 
+			echo "<li><a href=\"./profile.php?id=" . $row['usr'] . "\">@" . $row['usr']. "</a> tweeted ". $row['msg'] ."</li>"; 
 		}
 		displayTweetOptions($row['id']);	//print options for tweet
 	}
@@ -72,7 +72,6 @@ function displayTweetOptions($tid){
 
 function is_favorite($tid){
 	$uid = $_SESSION['id'];
-
 	$query = "SELECT favorites.uid "
 	. "FROM favorites "
 	. "WHERE favorites.uid = '$uid' AND favorites.tid = '$tid'";

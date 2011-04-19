@@ -35,7 +35,7 @@ function displayPrivateMessages() {
 <!-- Unique page content goes here. -->
 <div id="content">
 
-    <h1>Private Messages:</h1>
+    <h1>Inbox:</h1>
     <ul id="pmList">
         <?php displayPrivateMessages(); ?>
     </ul>

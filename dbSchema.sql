@@ -2,22 +2,17 @@
 -- version 3.3.9.2
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Apr 19, 2011 at 02:01 AM
--- Server version: 5.5.9
--- PHP Version: 5.3.5
+-- Host: 127.0.0.1
+-- Generation Time: Mar 22, 2011 at 01:12 AM
+-- Server version: 5.5.10
+-- PHP Version: 5.3.6
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `default`
 --
+
 
 -- --------------------------------------------------------
 
@@ -48,10 +43,10 @@ INSERT INTO `favorites` VALUES('userA', 16);
 -- Table structure for table `follows`
 --
 
-CREATE TABLE `follows` (
+CREATE TABLE IF NOT EXISTS `follows` (
   `follower` char(20) NOT NULL,
-  `approved` tinyint(4) NOT NULL DEFAULT '0',
   `followee` char(20) NOT NULL,
+  `approved` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`follower`,`followee`),
   KEY `followee` (`followee`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -67,7 +62,7 @@ CREATE TABLE `follows` (
 -- Table structure for table `followslist`
 --
 
-CREATE TABLE `followslist` (
+CREATE TABLE IF NOT EXISTS `followslist` (
   `LID` int(11) NOT NULL,
   `userID` char(20) NOT NULL,
   PRIMARY KEY (`LID`,`userID`),
@@ -85,7 +80,7 @@ CREATE TABLE `followslist` (
 -- Table structure for table `hashes`
 --
 
-CREATE TABLE `hashes` (
+CREATE TABLE IF NOT EXISTS `hashes` (
   `word` char(50) NOT NULL,
   `TID` int(11) NOT NULL,
   PRIMARY KEY (`word`,`TID`),
@@ -103,7 +98,7 @@ CREATE TABLE `hashes` (
 -- Table structure for table `hashtags`
 --
 
-CREATE TABLE `hashtags` (
+CREATE TABLE IF NOT EXISTS `hashtags` (
   `word` char(50) NOT NULL,
   PRIMARY KEY (`word`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -119,7 +114,7 @@ CREATE TABLE `hashtags` (
 -- Table structure for table `lists`
 --
 
-CREATE TABLE `lists` (
+CREATE TABLE IF NOT EXISTS `lists` (
   `ID` int(11) NOT NULL,
   `private` char(50) DEFAULT NULL,
   `creator` char(20) DEFAULT NULL,
@@ -138,7 +133,7 @@ CREATE TABLE `lists` (
 -- Table structure for table `mentions`
 --
 
-CREATE TABLE `mentions` (
+CREATE TABLE IF NOT EXISTS `mentions` (
   `TID` int(11) NOT NULL DEFAULT '0',
   `userID` char(20) NOT NULL DEFAULT '',
   PRIMARY KEY (`TID`,`userID`),
@@ -156,7 +151,7 @@ CREATE TABLE `mentions` (
 -- Table structure for table `messaged`
 --
 
-CREATE TABLE `messaged` (
+CREATE TABLE IF NOT EXISTS `messaged` (
   `MID` int(11) NOT NULL,
   `userID` char(20) NOT NULL,
   PRIMARY KEY (`MID`,`userID`),
@@ -174,7 +169,7 @@ CREATE TABLE `messaged` (
 -- Table structure for table `tweeted`
 --
 
-CREATE TABLE `tweeted` (
+CREATE TABLE IF NOT EXISTS `tweeted` (
   `TID` int(11) NOT NULL,
   `userID` char(20) NOT NULL,
   PRIMARY KEY (`TID`,`userID`),
@@ -185,18 +180,19 @@ CREATE TABLE `tweeted` (
 -- Dumping data for table `tweeted`
 --
 
-INSERT INTO `tweeted` VALUES(1, 'userA');
-INSERT INTO `tweeted` VALUES(4, 'userA');
-INSERT INTO `tweeted` VALUES(11, 'UserA');
-INSERT INTO `tweeted` VALUES(13, 'userA');
-INSERT INTO `tweeted` VALUES(14, 'userA');
-INSERT INTO `tweeted` VALUES(15, 'userA');
-INSERT INTO `tweeted` VALUES(16, 'userA');
-INSERT INTO `tweeted` VALUES(17, 'userA');
-INSERT INTO `tweeted` VALUES(18, 'userA');
-INSERT INTO `tweeted` VALUES(19, 'userA');
-INSERT INTO `tweeted` VALUES(2, 'userB');
-INSERT INTO `tweeted` VALUES(5, 'userB');
+INSERT INTO `tweeted` (`TID`, `userID`) VALUES
+(1, 'userA'),
+(4, 'userA'),
+(11, 'UserA'),
+(13, 'userA'),
+(14, 'userA'),
+(15, 'userA'),
+(16, 'userA'),
+(17, 'userA'),
+(18, 'userA'),
+(19, 'userA'),
+(2, 'userB'),
+(5, 'userB');
 
 -- --------------------------------------------------------
 
@@ -204,38 +200,37 @@ INSERT INTO `tweeted` VALUES(5, 'userB');
 -- Table structure for table `tweets`
 --
 
-CREATE TABLE `tweets` (
+CREATE TABLE IF NOT EXISTS `tweets` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `private` tinyint(1) NOT NULL DEFAULT '0',
   `favorited` tinyint(1) NOT NULL DEFAULT '0',
   `message` char(140) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `ID` (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `tweets`
 --
 
-INSERT INTO `tweets` VALUES(1, 0, 0, 'hi there!');
-INSERT INTO `tweets` VALUES(2, 0, 1, 'Sup d00d?');
-INSERT INTO `tweets` VALUES(4, 0, 0, 'hello!');
-INSERT INTO `tweets` VALUES(5, 1, 0, 'hey man');
-INSERT INTO `tweets` VALUES(6, 0, 0, 'whats up?dds');
-INSERT INTO `tweets` VALUES(7, 0, 0, 'hwdwd');
-INSERT INTO `tweets` VALUES(8, 0, 0, 'hdwcs');
-INSERT INTO `tweets` VALUES(9, 0, 0, 'hello world\r\n!');
-INSERT INTO `tweets` VALUES(11, 0, 0, 'Hello WORLDSzzz!');
-INSERT INTO `tweets` VALUES(12, 0, 0, 'NewONE!');
-INSERT INTO `tweets` VALUES(13, 0, 0, 'wsadsadpppppppp');
-INSERT INTO `tweets` VALUES(14, 0, 0, 'all');
-INSERT INTO `tweets` VALUES(15, 0, 1, 'hows it goin?');
-INSERT INTO `tweets` VALUES(16, 0, 0, 'my tweet?\r\n');
-INSERT INTO `tweets` VALUES(17, 0, 0, 'new tewaets?\r\n');
-INSERT INTO `tweets` VALUES(18, 0, 0, 'posting da tweats\r\nstuff');
-INSERT INTO `tweets` VALUES(19, 0, 0, 'hello!');
-INSERT INTO `tweets` VALUES(20, 0, 0, 'hello?');
-INSERT INTO `tweets` VALUES(21, 0, 0, 'test');
+INSERT INTO `tweets` (`ID`, `private`, `favorited`, `message`) VALUES
+(1, 0, 0, 'hi there!'),
+(2, 0, 0, 'Sup d00d?'),
+(4, 0, 0, 'hello!'),
+(5, 1, 0, 'hey man'),
+(6, 0, 0, 'whats up?dds'),
+(7, 0, 0, 'hwdwd'),
+(8, 0, 0, 'hdwcs'),
+(9, 0, 0, 'hello world\r\n!'),
+(11, 0, 0, 'Hello WORLDSzzz!'),
+(12, 0, 0, 'NewONE!'),
+(13, 0, 0, 'wsadsadpppppppp'),
+(14, 0, 0, 'all'),
+(15, 0, 0, 'hows it goin?'),
+(16, 0, 0, 'my tweet?\r\n'),
+(17, 0, 0, 'new tewaets?\r\n'),
+(18, 0, 0, 'posting da tweats\r\nstuff'),
+(19, 0, 0, 'hello!');
 
 -- --------------------------------------------------------
 
@@ -243,7 +238,7 @@ INSERT INTO `tweets` VALUES(21, 0, 0, 'test');
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `ID` char(20) NOT NULL,
   `password` char(50) DEFAULT NULL,
   `first_name` char(50) DEFAULT NULL,
@@ -262,8 +257,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` VALUES('userA', 'password', 'john', 'doe', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `users` VALUES('userB', 'password', 'jake', 'jakerson', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `users` (`ID`, `password`, `first_name`, `last_name`, `email`, `private`, `lang`, `bio`, `location`, `URL`, `birthday`) VALUES
+('userA', 'password', 'john', 'doe', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('userB', 'password', 'jake', 'jakerson', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Constraints for dumped tables
@@ -275,6 +271,7 @@ INSERT INTO `users` VALUES('userB', 'password', 'jake', 'jakerson', NULL, NULL, 
 ALTER TABLE `favorites`
   ADD CONSTRAINT `favorites_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`ID`),
   ADD CONSTRAINT `favorites_ibfk_2` FOREIGN KEY (`tid`) REFERENCES `tweets` (`ID`);
+
 
 --
 -- Constraints for table `follows`
