@@ -5,6 +5,15 @@
  * @ignore
  * @package  Tools
  */
+ 
+ //Takes a list of tuples and turns them into a php array.
+ function to_array($result){
+	$array = array();
+	while ( $object=mysql_fetch_array($result) ) {
+		$array[] = $object;
+	}
+	return $array;
+}
 
  //Runs an SQL query.
 function run_sql($query) {
@@ -119,10 +128,7 @@ function db_getUserTweets($id) {
 		   . "WHERE users.id=". $id ." and users.id=tweeted.userid and 
 tweeted.tid=tweets.id";
 	$result = run_sql($query);
-	$tweets = array();
-	while ( $tweet=mysql_fetch_array($result) ) {
-		$tweets[] = $tweet;
-	}
+	$tweets = to_array($result);
 	return $tweets;
 }
 
@@ -136,11 +142,7 @@ function db_getFollowers($id) {
 		   . "FROM users, follows "
 		   . "WHERE followee=".$id." and users.id=follower";
 	$result = run_sql($query);
-	//Loop through the set of followers
-	$followers = array();
-	while ( $follower=mysql_fetch_array($result) ) {
-		$followers[] = $follower;
-	}
+	$followers = to_array($result);
 	return $followers;
 }
 
@@ -154,11 +156,7 @@ function db_getFollowing($id) {
 		   . "FROM users, follows "
 		   . "WHERE follower=".$id." and users.id=followee";
 	$result = run_sql($query);
-	//Loop through the set of followers
-	$following = array();
-	while ( $follower=mysql_fetch_array($result) ) {
-		$following[] = $follower;
-	}
+	$following = to_array($result);
 	return $following;
 }
 
@@ -170,10 +168,16 @@ function db_getFollowing($id) {
 function db_addFollower($user, $person) {
 	//Build the queries for the database
 	
+	$approved = 1;
+	$private = $person['private'];
+	if ($private){
+		$approved = 0;
+	}
+	
 	//This creates a new tweet (The two queries need to run on the same connection for LAS_INSERT_ID() to work)
 	$queries = array();
-	$queries[] = "INSERT INTO follows(follower, followee)"
-			.    "VALUES(". $user .",". $person .")";
+	$queries[] = "INSERT INTO follows(follower, approved, followee)"
+			.    "VALUES(". $user .",". $approved .",". $person .")";
 	$results = run_statements($queries);
 	
 	//Make sure the insert succeeded
@@ -183,6 +187,15 @@ function db_addFollower($user, $person) {
 	
 	//If we get here, everything worked
 	return true;
+}
+
+function db_getUnapprovedFollowers($id){
+	$query = "SELECT * "
+		   . "FROM users, follows "
+		   . "WHERE followee=".$id." and users.id=follower and approved='0'";
+	$result = run_sql($query);
+	$unapproved = to_array($result);
+	return $unapproved;
 }
 
 /* Facilitates follower requests to the db.
