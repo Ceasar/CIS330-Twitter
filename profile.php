@@ -31,13 +31,24 @@ function displayUserProfile() {
 }
 
 function displayUserTweets() {
-	global $id;
-	$user = db_getUserById($id);
-	$name = $user['first_name'];
-	$tweets = db_getUserTweets($id);
-	//Loop through the set of tweets
-	foreach ($tweets as $tweet) {
-		echo "<li>@". $name ." tweeted ". $tweet['msg'] ."</li>";
+	global $id, $first, $private;
+	if ($private){
+		$fids = db_getFollowerIds($id);
+		if (in_array($_SESSION['id'], $fids)){
+			$tweets = db_getUserTweets($id);
+			//Loop through the set of tweets
+			foreach ($tweets as $tweet) {
+				echo "<li>@". $first ." tweeted ". $tweet['msg'] ."</li>";
+			}
+		} else {
+			echo "This user's information is private. Follow them to see their feed.";
+		}
+	} else {
+		$tweets = db_getUserTweets($id);
+		//Loop through the set of tweets
+		foreach ($tweets as $tweet) {
+			echo "<li>@". $first ." tweeted ". $tweet['msg'] ."</li>";
+		}
 	}
 }
 
