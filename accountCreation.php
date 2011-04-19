@@ -1,44 +1,11 @@
 <?php
-//Includes:
-include_once("./databaseTools.php");
-
-function newAccountWidget() {
-    if (isset($POST['submit'])) {
-        $result = addUser();
-        if(!$result) {
-            echo "Account creation was unsuccessful.";
-            createAccountForm();
-        }
-        else {
-            echo "Account creation was successful.";
-        }
-    }
-    else {
-        createAccountForm();
-    }
-}
-
-function addUser() {
-    $user = $_POST['userid'];
-    $first = $_POST['first'];
-    $last = $_POST['last'];
-    $email = $_POST['email'];
-    $priv = $_POST['private'] ? "true" : "false";
-    $lang = $_POST['lang'];
-    $bio = $_POST['bio'];
-    $loc = $_POST['location'];
-    $url = $_POST['url'];
-    $bday = $_POST['birthday'];
-    
-    $result = db_addUser($user, $first, $last, $email, $priv, $lang, $bio, $loc, $url, $bday);
-    return $result;
-}
 
 function createAccountForm() {
     ?>
-    <form method="post" action="<?php $PHP_SELF;?>">
+    <form name="accountcreate" method="post" action="./createSuccess.php">
         <pre>
-        User ID:    <input type="text" name="userid" value="Max 20 chars." size="20" onfocus="value=" />
+        User ID:    <input type="text" name="userid" value="Max 20 chars." size="20" onfocus="value=''" />
+        Password:   <input type="password" name="password" />
         First Name: <input type="text" name="first" size="50" />
         Last Name:  <input type="text" name="last" size="50" />
         E-Mail:     <input type="text" name="email" size="50" />
@@ -58,25 +25,17 @@ function createAccountForm() {
 
 <html>
 
-<head>
-    <title>Account Creation</title>
-</head>
+<?php include_once("./assets/templates/head.php");?>
 
 <body>
-    <div id="header">
-        <h1>Twitter Project</h1>
-    </div>
-    
-    <div id="content">
-    
-        <div id="createAccount">
-            <h2>Create New Account:</h2>
-            <?php 
-                createAccountForm();
-            ?>
-        </div>
-    </div>
-</body>
 
+<?php include_once("./assets/templates/header.php;?>
+
+<!-- Unique page content goes here. -->
+<div id="content">
+    	<?php createAccountForm(); ?>
+</div> <!-- End Content Div -->
+
+</body>
 </html>
     
