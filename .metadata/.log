@@ -1,0 +1,79 @@
+!SESSION 2011-04-17 22:27:20.996 -----------------------------------------------
+eclipse.buildId=I20100608-0911
+java.version=1.5.0_26
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86, WS=cocoa, NL=en_US
+Framework arguments:  -keyring /Users/Sean/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86 -keyring /Users/Sean/.eclipse_keyring -showlocation
+
+!ENTRY com.google.gdt.eclipse.suite 1 0 2011-04-17 22:28:04.261
+!MESSAGE Registering: com.google.appengine.eclipse.sdkbundle.1.3.7_1.3.7.v201008311427
+
+!ENTRY com.google.gdt.eclipse.suite 1 0 2011-04-17 22:28:04.477
+!MESSAGE Registering: com.google.gwt.eclipse.sdkbundle.2.0.4_2.0.4.v201006301309
+
+!ENTRY com.google.gdt.eclipse.suite 1 0 2011-04-17 22:28:04.917
+!MESSAGE Registering: com.google.appengine.eclipse.sdkbundle.1.4.0_1.4.0.v201012021502
+
+!ENTRY com.google.gdt.eclipse.suite 1 0 2011-04-17 22:28:05.095
+!MESSAGE Registering: com.google.gwt.eclipse.sdkbundle.2.1.0_2.1.0.v201010280102
+
+!ENTRY org.eclipse.jface 2 0 2011-04-17 22:28:08.615
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2011-04-17 22:28:08.615
+!MESSAGE A conflict occurred for ALT+SHIFT+D H:
+Binding(ALT+SHIFT+D H,
+	ParameterizedCommand(Command(com.instantiations.designer.gwt.launch.junitGWTLaunchShortcut.debug,Debug GWT JUnit Test,
+		Debug GWT JUnit Test,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+SHIFT+D H,
+	ParameterizedCommand(Command(org.eclipse.php.deubg.ui.phpexeShortcut.debug,Debug PHP Script,
+		Debug PHP Script,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2011-04-17 22:28:08.615
+!MESSAGE A conflict occurred for ALT+COMMAND+Q P:
+Binding(ALT+COMMAND+Q P,
+	ParameterizedCommand(Command(org.eclipse.ui.views.showView,Show View,
+		Shows a particular view,
+		Category(org.eclipse.ui.category.views,Views,Commands for opening views,true),
+		org.eclipse.ui.handlers.ShowViewHandler@1a0e99,
+		[Lorg.eclipse.ui.internal.commands.Parameter;@b46504,,true),[Lorg.eclipse.core.commands.Parameterization;@53eaff),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+Binding(ALT+COMMAND+Q P,
+	ParameterizedCommand(Command(org.eclipse.ui.views.showView,Show View,
+		Shows a particular view,
+		Category(org.eclipse.ui.category.views,Views,Commands for opening views,true),
+		org.eclipse.ui.handlers.ShowViewHandler@1a0e99,
+		[Lorg.eclipse.ui.internal.commands.Parameter;@b46504,,true),[Lorg.eclipse.core.commands.Parameterization;@69143c),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2011-04-17 22:28:08.615
+!MESSAGE A conflict occurred for ALT+SHIFT+X H:
+Binding(ALT+SHIFT+X H,
+	ParameterizedCommand(Command(com.instantiations.designer.gwt.launch.junitGWTLaunchShortcut.run,Run GWT JUnit Test,
+		Run GWT JUnit Test,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+SHIFT+X H,
+	ParameterizedCommand(Command(org.eclipse.php.deubg.ui.phpexeShortcut.run,Run PHP Script,
+		Run PHP Script,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.core.net 1 0 2011-04-17 22:28:08.789
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
