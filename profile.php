@@ -30,12 +30,14 @@ function displayUserProfile() {
 	<?php
 }
 
-function displayUserFeed() {
+function displayUserTweets() {
 	global $id;
+	$user = db_getUserById($id);
+	$name = $user['first_name'];
 	$tweets = db_getUserTweets($id);
 	//Loop through the set of tweets
 	foreach ($tweets as $tweet) {
-		echo "<li>@". $tweet['usr'] ." tweeted ". $tweet['msg'] ."</li>";
+		echo "<li>@". $name ." tweeted ". $tweet['msg'] ."</li>";
 	}
 }
 
@@ -149,7 +151,7 @@ function followButton() {
 				<ul id="newsList">
 					<!-- This function populates the newsfeed list with elements 
 from the db -->
-					<?php displayUserFeed(); ?>
+					<?php displayUserTweets(); ?>
 				</ul>
 			</div>
 		</div>
