@@ -52,12 +52,8 @@ function displayFollowers() {
 
 function displayFollowing() {
 	global $id;
-	//Query the db for users that the profiled user follows
-	$query = "SELECT * "
-		   . "FROM users, follows "
-		   . "WHERE follower=".$id." and users.id=followee";
-	$result = run_sql($query);
-	//Loop through the set of followers
+	$result = db_getFollowing($id);
+	//Loop through the set of following
 	while ( $user=mysql_fetch_array($result) ) {
 		$first_name = $user['first_name'];
 		$last_name = $user['last_name'];

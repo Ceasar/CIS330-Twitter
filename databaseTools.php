@@ -141,6 +141,24 @@ function db_getFollowers($id) {
 }
 
 /* Facilitates follower requests to the db.
+ * Args: $id - the user id
+ * Returns: A list of people that the user is following.
+ */
+function db_getFollowing($id) {
+	//Query the db for followers of the profiled user
+	$query = "SELECT * "
+		   . "FROM users, follows "
+		   . "WHERE follower=".$id." and users.id=followee";
+	$result = run_sql($query);
+	//Loop through the set of followers
+	$following = array();
+	while ( $follower=mysql_fetch_array($result) ) {
+		$following[] = $follower;
+	}
+	return $following;
+}
+
+/* Facilitates follower requests to the db.
  * Args: $user - the username (id)
  *       $person - the message text
  * Returns: Boolean whether the tweet was successfully added.
