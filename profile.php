@@ -110,6 +110,15 @@ function createUnfollowForm() {
 	<?php
 }
 
+function createPMForm() {
+	?>
+	<form method="get" action="./sendPrivateMessage.php?">
+		<?php echo "<input type='hidden' name='userid' value='".$_GET['id']."'>"; ?>
+		<input type="submit" value="Send PM">
+	</form>
+	<?php
+}
+
 function followButton() {
 	global $followers, $first, $last;
 	//See if the user is even logged in
@@ -144,6 +153,10 @@ function followButton() {
 	}
 }
 
+function messageButton() {
+	createPMForm();
+}
+
 ?>
 
 <html>
@@ -174,7 +187,7 @@ function followButton() {
 				</ul>
 			</div>
 			
-			<?php followButton();?>
+			<?php followButton(); messageButton(); ?>
 		
 			<div id="newsFeed">
 				<h2>Timeline:</h2>

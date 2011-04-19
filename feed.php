@@ -98,7 +98,7 @@ function is_favorite($tid){
 	
 	<div id="newsFeed">
 			<h2>News Feed:</h2>
-			<a href="./feed.php">Tweets</a>  <a href="./mentions.php?id=<?php echo $_SESSION['id']?>">Mentions</a>  <a href="./sendprivatemessage.php">Private Message</a>
+			<a href="./feed.php">Tweets</a>  <a href="./mentions.php?id=<?php echo $_SESSION['id']?>">Mentions</a>  <a href="./privateMessages.php">Private Messages</a>
 			<ul id="newsList">
 				<!-- This function populates the newsfeed list with elements from the db -->
 				<?php displayNewsFeed(); ?>
