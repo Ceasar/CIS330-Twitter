@@ -6,7 +6,6 @@ session_start();
 
 //Includes:
 include_once("./databaseTools.php");
-include_once("./newTweetWidget.php");
 
 //DEBUG
 //$_SESSION['username'] = "userA"; //Fake a session
@@ -14,28 +13,43 @@ include_once("./newTweetWidget.php");
 
 //Page-specific Functions
 //-----------------------
-function displayNewsFeed() {
-	//Query the db for all tweets/PMs related to the current user
-	$query = "SELECT users.id as usr, tweets.message as msg\n"
-		   . "FROM users, tweeted, tweets\n"
-		   . "WHERE users.id=tweeted.userid and tweeted.tid=tweets.id";
-	$result = run_sql($query);
-	//Loop through the set of tweets
-	while ( $row=mysql_fetch_array($result) ) {
-		echo "<li>@". $row['usr'] ." tweeted ". $row['msg'] ."</li>";
+
+function displaySucessfulApprove() {
+	if ( isset($_SESSION['username']) ) {
+		$uid = $_SESSION['id'];;
+		if (isset($_POST['approve'])) {
+			$id = $_POST['rid'];
+			db_approve($id, $uid);
+		}
 	}
 }
 
-//Displays a user's feed.
-function displayUserFeed($id) {
-	$following = db_getFollowing($id);
-	//Loop through the set of following
-	foreach ($following as $followed) {
-		$name = $followed['first_name'];
-		$tweets = db_getUserTweets($followed['id']);
-		foreach ($tweets as $tweet) {
-			echo "<li>@". $name ." tweeted ". $tweet['msg'] ."</li>";
+//Displays a list of unapproved followers.
+function displayUnapproved() {
+	if ( isset($_SESSION['username']) ) {
+		$id = $_SESSION['id'];
+		echo $id;
+		$unapproved = db_getUnapproved($id);
+		if ((count($unapproved)) != 0){
+			//Loop through the set of following
+			foreach ($unapproved as $rid) {
+				$rid = $rid['id'];
+				$request = db_getUserById($rid);
+				$first_name = $request['first_name'];
+				$last_name = $request['last_name'];
+				$full_name = $first_name." ".$last_name;
+				echo "<li>@". $full_name ."</li>";?>
+				<form method="post" action="<?php $PHP_SELF;?>">
+					<input type="hidden" value="<?php echo $rid;?>" name="rid">
+					<input type="submit" value="Approve" name="approve">
+				</form>
+				<?php
+			}
+		} else {
+			echo "You have no unnapproved followers.";
 		}
+	} else {
+		echo "Log in to see if you have any unapproved followers.";
 	}
 }
 
@@ -52,16 +66,9 @@ function displayUserFeed($id) {
 <!-- Unique page content goes here. -->
 <div id="content">
 	
-	<div id="newsFeed">
-			<h2>News Feed:</h2>
-			<ul id="newsList">
-				<!-- This function populates the newsfeed list with elements from the db -->
-				<?php displayNewsFeed(); ?>
-			</ul>
-		</div>
-		
-		<!--  This draws a widget for submitting tweets. Exposed by 'newTweetWidget.php' -->
-		<?php addTweetWidget(); ?>
+	<div id="success">
+		<?php displaySucessfulApprove(); ?>
+		<?php displayUnapproved(); ?>
 	</div>
 	
 </div> <!-- End Content Div -->
