@@ -35,7 +35,7 @@ function run_sql($query) {
 function run_statements($queries) {
 	//Auth Vars.
 	$dbUsername="root";
-	$dbPassword="";
+	$dbPassword="root";
 	$database="default";
 	
 	//Connect to the db
@@ -148,6 +148,15 @@ function db_getUserById($id) {
 	$query = "SELECT * "
 	   . "FROM users "
 	   . "WHERE users.id='".$id."'";
+	$result = run_sql($query);
+	return mysql_fetch_array($result);
+}
+
+//Gets a list by its id
+function db_getListById($id) {
+	$query = "SELECT * "
+	   . "FROM lists "
+	   . "WHERE lists.id='".$id."'";
 	$result = run_sql($query);
 	return mysql_fetch_array($result);
 }

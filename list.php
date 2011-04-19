@@ -10,35 +10,9 @@ include_once("./databaseTools.php");
 //$_SESSION['username'] = "userA";
 
 //Query the db for the user
-$user = db_getUserById($_GET['id']);
-$id = $user['ID'];
-$private = $user['private'];
-$first = $user['first_name'];
-$last = $user['last_name'];
-$followers = db_getFollowers($id);
+$list = db_getListById($_GET['id']);
 
-function displayUserProfile() {
-	global $user;
-	$first = $user['first_name'];
-	$last = $user['last_name'];
-	$location = $user['location'];
-	$bio = $user['bio'];
-	$url = $user['URL'];
-	$email = $user['email'];
-	$language = $user['lang'];
-	$birthday = $user['birthday'];
-	?>
-	<h2><?php echo $first." ".$last; ?></h2>
-	<span>Location: <?php echo $location;?></span>
-	<p>Bio: <?php echo $bio;?></p>
-	<p>URL: <a href="<?php echo $url;?>"/><?php echo $url;?></a></p>
-	<p>Email: <?php echo $email;?></p>
-	<p>Language: <?php echo $language;?></p>
-	<p>Birthday: <?php echo $birthday;?></p>
-	<?php
-}
-
-function displayUserTweets() {
+function displayListTweets() {
 	global $id, $first, $private;
 	if ($private){
 		$fids = db_getFollowerIds($id);
@@ -49,6 +23,9 @@ function displayUserTweets() {
 				echo "<li>@". $first ." tweeted ". $tweet['msg'] ."</li>";
 			}
 		} else {
+			echo "hi";
+			echo $_SESSION['id'];
+			echo " ".$fids;
 			echo "This user's information is private. Follow them to see their feed.";
 		}
 	} else {
@@ -57,29 +34,6 @@ function displayUserTweets() {
 		foreach ($tweets as $tweet) {
 			echo "<li>@". $first ." tweeted ". $tweet['msg'] ."</li>";
 		}
-	}
-}
-
-function displayFollowers() {
-	global $followers;
-	//Loop through the set of followers
-	foreach ($followers as $follower) {
-		$first_name = $follower['first_name'];
-		$last_name = $follower['last_name'];
-		$full_name = $first_name." ".$last_name;
-		echo "<li>@". $full_name ."</li>";
-	}
-}
-
-function displayFollowing() {
-	global $id;
-	$following = db_getFollowing($id);
-	//Loop through the set of following
-	foreach ($following as $followed) {
-		$first_name = $followed['first_name'];
-		$last_name = $followed['last_name'];
-		$full_name = $first_name." ".$last_name;
-		echo "<li>@". $full_name ."</li>";
 	}
 }
 
@@ -140,7 +94,7 @@ function followButton() {
 
 <head>
 	<!-- This makes the title display the username if the client is logged in -->
-	<title>Twitter - News Feed
+	<title>Twitter - List
 		<?php
 			if ( isset($_GET['id']) ) {
 				echo " - " . $_GET['id'];
@@ -170,7 +124,7 @@ function followButton() {
 				<ul id="newsList">
 					<!-- This function populates the newsfeed list with elements 
 from the db -->
-					<?php displayUserTweets(); ?>
+					<?php displayListTweets(); ?>
 				</ul>
 			</div>
 		</div>

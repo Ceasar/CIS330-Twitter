@@ -42,7 +42,14 @@ function displayUserTweets() {
 	global $id, $first, $private;
 	if ($private){
 		$fids = db_getFollowerIds($id);
-		if (in_array($_SESSION['id'], $fids)){
+		$permitted = 0;
+		foreach ($fids as $fid){
+			if ($fid[0] == $_SESSION['id']){
+				$permitted = 1;
+			}
+		}
+		
+		if ($permitted){
 			$tweets = db_getUserTweets($id);
 			echo "Total tweets: ".count($tweets);
 			//Loop through the set of tweets
@@ -144,7 +151,7 @@ function followButton() {
 
 <head>
 	<!-- This makes the title display the username if the client is logged in -->
-	<title>Twitter - News Feed
+	<title>Twitter - Profile
 		<?php
 			if ( isset($_GET['id']) ) {
 				echo " - " . $_GET['id'];
