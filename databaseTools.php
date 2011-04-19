@@ -293,8 +293,8 @@ function db_removeFollower($user, $person) {
  * Returns: Boolean whether user was successfully added
  */
 function db_addUser($user, $first, $last, $email, $private, $lang, $bio, $location, $url, $birthday) {
-    $query = "INSERT INTO users " . 
-             "VALUES ($user, $first, $last, $email, $private, $lang, $bio, $location, $url, $birthday)";
+    $query = "INSERT INTO users(ID, password, first_name, last_name, email, private, lang, bio, location, URL, birthday) " . 
+             "VALUES ('". $user ."','". $first ."','". $last ."','". $email ."','". $private ."','". $lang ."','". $bio ."','". $location ."','". $url ."','". $birthday ."')";
     $result = run_sql($query);
     
     if (!$result){
