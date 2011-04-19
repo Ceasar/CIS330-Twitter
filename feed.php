@@ -27,7 +27,7 @@ function displayNewsFeed() {
 		//print tweet with star if favorite
 		if(is_favorite($row['id'])){
 			echo "<li><img src=\"./assets/images/star.jpeg\">"
-					." @". $row['usr'] ." tweeted ". $row['msg'] ."</li>"; //print tweet
+					."<a href=\"./profile.php?id=" . $row['usr'] . "\">@" . $row['usr']. "</a> tweeted ". $row['msg'] ."</li>"; //print tweet
 		}
 		else{
 			echo "<li><a href=\"./profile.php?id=" . $row['usr'] . "\">@" . $row['usr']. "</a> tweeted ". $row['msg'] ."</li>"; 
@@ -97,6 +97,7 @@ function is_favorite($tid){
 	
 	<div id="newsFeed">
 			<h2>News Feed:</h2>
+			<a href="./feed.php">Tweets</a>  <a href="./mentions.php">Mentions</a>  <a href="./sendprivatemessage.php">Private Message</a>
 			<ul id="newsList">
 				<!-- This function populates the newsfeed list with elements from the db -->
 				<?php displayNewsFeed(); ?>

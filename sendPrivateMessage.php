@@ -8,7 +8,7 @@
 include_once("./databaseTools.php");
 
 //DEBUG:
-$_SESSION['id'] = "userA";
+//$_SESSION['id'] = "userA";
 
 function addMessageWidget() {
     if( isset($_GET['userid']) ) {

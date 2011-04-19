@@ -18,7 +18,7 @@
  //Runs an SQL query.
 function run_sql($query) {
 	$dbUsername = "root";
-	$dbPassword = "";
+	$dbPassword = "root";
 	$database = "default";
 	
 	$connection = mysql_connect("localhost", $dbUsername, $dbPassword);
@@ -101,6 +101,37 @@ function db_addTweet($user, $message, $private=false) {
 			.    "VALUES(". ($private?"TRUE":"FALSE") .",'". addslashes($_POST['message']) ."')";
 	$queries[] = "INSERT INTO tweeted(tID, userID)"
 			.    "VALUES(LAST_INSERT_ID(),'". addslashes($user) ."')";
+	$results = run_statements($queries);
+	
+	//Make sure the insert succeeded
+	if (!$results[0]||!$results[1]) {
+		return false;
+	}
+	
+	//If we get here, everything worked
+	return true;
+}
+
+/* Actually facilitates submitting tweets to the db.
+ * Args: $user - the username (id)
+ *       $message - the message text
+ *       $private - whether the message should be private
+ * Returns: Boolean whether the tweet was successfully added.
+ */
+function db_addMessage($user, $receiver, $message) {
+	//Validate input (Just length for now...)
+	if ( strlen($message)>140 ) {
+		return false;
+	} 
+	
+	//Build the queries for the database
+	
+	//This creates a new tweet (The two queries need to run on the same connection for LAS_INSERT_ID() to work)
+	$queries = array();
+	$queries[] = "INSERT INTO messages(message)"
+			.    "VALUES('". addslashes($message) ."')";
+	$queries[] = "INSERT INTO messaged(MID, senderID, receiverID)"
+			.    "VALUES(LAST_INSERT_ID(),'". addslashes($user) ."','". addslashes($receiver) ."')";
 	$results = run_statements($queries);
 	
 	//Make sure the insert succeeded

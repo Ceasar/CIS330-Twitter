@@ -68,16 +68,10 @@ function execute_retweet($uid, $tweet_id){
 	}
 	//Loop through the set of tweets (will only be one in this case)
 	while ($row=mysql_fetch_array($result) ) {
-		echo "<li>@". $row['usr'] ." tweeted ". $row['msg'] ."</li>"; //print tweet
-		$query2 = "INSERT INTO favorites "
-             . "VALUES ('$uid', '$tweet_id')";
-		$result2 = run_sql($query2);
-		if (!$result2){
-			echo "failed";
-			return false;
-		}
+		$orig_usr = $row['usr'];
+		$msg = "retweet:" . $row['usr'] . $row['msg'] ;
+		db_addTweet($uid, $msg);
 	}
-	return true;
 }
 
 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=feed.php">';
