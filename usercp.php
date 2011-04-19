@@ -3,8 +3,8 @@
 include_once("./databaseTools.php");
 
 //DEBUG
-$_SESSION['id'] = 0; //Fake a session
-$_SESSION['username'] = "userA";
+//$_SESSION['id'] = 0; //Fake a session
+//$_SESSION['username'] = "userA";
 
 //Page-specific
 //-------------
