@@ -10,7 +10,7 @@ $_SESSION['id'] = 3; //Fake a session
 $_SESSION['username'] = "userA";
 
 //Query the db for the user
-$user = db_getUserById($GET[id]);
+$user = db_getUserById($_GET['id']);
 $id = $user['ID'];
 $private = $user['private'];
 $first = $user['first_name'];
@@ -87,7 +87,7 @@ function followButton() {
 	//See if the user is even logged in
 	if ( isset($_SESSION['username']) ) {
 		//Check to see if we are already following the person.
-		if (count($followers) {
+		if (count($followers)) {
 			if (isset($_POST['unfollow'])) {
 				$user = $_SESSION['id'];
 				$person = $_GET['id'];

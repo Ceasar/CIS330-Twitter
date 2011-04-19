@@ -109,7 +109,7 @@ function db_getUserById($id) {
 	   . "FROM users "
 	   . "WHERE users.id='".$id."'";
 	$result = run_sql($query);
-	return ysql_fetch_array($result);
+	return mysql_fetch_array($result);
 }
 
 //Query the db for all tweets/PMs related to the current user
