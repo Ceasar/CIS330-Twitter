@@ -174,6 +174,7 @@ CREATE TABLE IF NOT EXISTS `messaged` (
 CREATE TABLE IF NOT EXISTS `messages` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `message` char(140) DEFAULT NULL,
+  `datetime` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `ID` (`ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
@@ -221,6 +222,7 @@ CREATE TABLE IF NOT EXISTS `tweets` (
   `private` tinyint(1) NOT NULL DEFAULT '0',
   `favorited` tinyint(1) NOT NULL DEFAULT '0',
   `message` char(140) DEFAULT NULL,
+  `datetime` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `ID` (`ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
