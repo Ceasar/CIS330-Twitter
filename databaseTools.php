@@ -118,8 +118,12 @@ function db_getUserTweets($id) {
 		   . "FROM users, tweeted, tweets\n"
 		   . "WHERE users.id=". $id ." and users.id=tweeted.userid and 
 tweeted.tid=tweets.id";
-	$result = run_sql($query);
-	return $result;
+	$result = run_sql($query);\
+	$tweets = array();
+	while ( $tweet=mysql_fetch_array($result) ) {
+		$tweets[] = $tweet;
+	}
+	return $tweets;
 }
 
 /* Facilitates follower requests to the db.
