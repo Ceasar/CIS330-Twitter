@@ -98,8 +98,13 @@ function db_addTweet($user, $message, $private=false) {
 	
 	//This creates a new tweet (The two queries need to run on the same connection for LAS_INSERT_ID() to work)
 	$queries = array();
+<<<<<<< HEAD
 	$queries[] = "INSERT INTO tweets(private, message, datetime)"
 			.    "VALUES(". ($private?"TRUE":"FALSE") .",'". addslashes($_POST['message']) ."','$datetime')";
+=======
+	$queries[] = "INSERT INTO tweets(private, message)"
+			.    "VALUES(". ($private?"TRUE":"FALSE") .",'". addslashes($message) ."')";
+>>>>>>> e6d5ece65042b5589e572e7bdb697a77952f1911
 	$queries[] = "INSERT INTO tweeted(tID, userID)"
 			.    "VALUES(LAST_INSERT_ID(),'". addslashes($user) ."')";
 	$results = run_statements($queries);
@@ -125,13 +130,12 @@ function db_addMessage($user, $receiver, $message) {
 		return false;
 	} 
 	
-	$datetime =  date("Y-h-j g:i:s");
 	//Build the queries for the database
 	
 	//This creates a new tweet (The two queries need to run on the same connection for LAS_INSERT_ID() to work)
 	$queries = array();
-	$queries[] = "INSERT INTO messages(message, datetime)"
-			.    "VALUES('". addslashes($message) ."','$datetime')";
+	$queries[] = "INSERT INTO messages(message)"
+			.    "VALUES('". addslashes($message) ."')";
 	$queries[] = "INSERT INTO messaged(MID, senderID, receiverID)"
 			.    "VALUES(LAST_INSERT_ID(),'". addslashes($user) ."','". addslashes($receiver) ."')";
 	$results = run_statements($queries);
