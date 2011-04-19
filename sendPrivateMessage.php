@@ -1,5 +1,5 @@
 <?php
-
+<<<<<<< HEAD
 session_start();
 
 /* Send private message page

@@ -18,7 +18,7 @@
  //Runs an SQL query.
 function run_sql($query) {
 	$dbUsername = "root";
-	$dbPassword = "root";
+	$dbPassword = "";
 	$database = "default";
 	
 	$connection = mysql_connect("localhost", $dbUsername, $dbPassword);
@@ -35,7 +35,7 @@ function run_sql($query) {
 function run_statements($queries) {
 	//Auth Vars.
 	$dbUsername="root";
-	$dbPassword="root";
+	$dbPassword="";
 	$database="default";
 	
 	//Connect to the db
@@ -91,14 +91,20 @@ function db_addTweet($user, $message, $private=false) {
 	//Validate input (Just length for now...)
 	if (strlen($message)>140) {
 		return false;
-	} 
+	}
+	$datetime =  date("Y-h-j g:i:s");
 	
 	//Build the queries for the database
 	
 	//This creates a new tweet (The two queries need to run on the same connection for LAS_INSERT_ID() to work)
 	$queries = array();
+<<<<<<< HEAD
+	$queries[] = "INSERT INTO tweets(private, message, datetime)"
+			.    "VALUES(". ($private?"TRUE":"FALSE") .",'". addslashes($_POST['message']) ."','$datetime')";
+=======
 	$queries[] = "INSERT INTO tweets(private, message)"
 			.    "VALUES(". ($private?"TRUE":"FALSE") .",'". addslashes($message) ."')";
+>>>>>>> e6d5ece65042b5589e572e7bdb697a77952f1911
 	$queries[] = "INSERT INTO tweeted(tID, userID)"
 			.    "VALUES(LAST_INSERT_ID(),'". addslashes($user) ."')";
 	$results = run_statements($queries);
