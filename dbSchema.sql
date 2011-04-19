@@ -22,6 +22,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 CREATE TABLE IF NOT EXISTS `follows` (
   `follower` char(20) NOT NULL,
   `followee` char(20) NOT NULL,
+  `approved` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`follower`,`followee`),
   KEY `followee` (`followee`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -178,6 +179,7 @@ INSERT INTO `tweeted` (`TID`, `userID`) VALUES
 CREATE TABLE IF NOT EXISTS `tweets` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `private` tinyint(1) NOT NULL DEFAULT '0',
+  `favorited` tinyint(1) NOT NULL DEFAULT '0',
   `message` char(140) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `ID` (`ID`)
@@ -187,24 +189,24 @@ CREATE TABLE IF NOT EXISTS `tweets` (
 -- Dumping data for table `tweets`
 --
 
-INSERT INTO `tweets` (`ID`, `private`, `message`) VALUES
-(1, 0, 'hi there!'),
-(2, 0, 'Sup d00d?'),
-(4, 0, 'hello!'),
-(5, 1, 'hey man'),
-(6, 0, 'whats up?dds'),
-(7, 0, 'hwdwd'),
-(8, 0, 'hdwcs'),
-(9, 0, 'hello world\r\n!'),
-(11, 0, 'Hello WORLDSzzz!'),
-(12, 0, 'NewONE!'),
-(13, 0, 'wsadsadpppppppp'),
-(14, 0, 'all'),
-(15, 0, 'hows it goin?'),
-(16, 0, 'my tweet?\r\n'),
-(17, 0, 'new tewaets?\r\n'),
-(18, 0, 'posting da tweats\r\nstuff'),
-(19, 0, 'hello!');
+INSERT INTO `tweets` (`ID`, `private`, `favorited`, `message`) VALUES
+(1, 0, 0, 'hi there!'),
+(2, 0, 0, 'Sup d00d?'),
+(4, 0, 0, 'hello!'),
+(5, 1, 0, 'hey man'),
+(6, 0, 0, 'whats up?dds'),
+(7, 0, 0, 'hwdwd'),
+(8, 0, 0, 'hdwcs'),
+(9, 0, 0, 'hello world\r\n!'),
+(11, 0, 0, 'Hello WORLDSzzz!'),
+(12, 0, 0, 'NewONE!'),
+(13, 0, 0, 'wsadsadpppppppp'),
+(14, 0, 0, 'all'),
+(15, 0, 0, 'hows it goin?'),
+(16, 0, 0, 'my tweet?\r\n'),
+(17, 0, 0, 'new tewaets?\r\n'),
+(18, 0, 0, 'posting da tweats\r\nstuff'),
+(19, 0, 0, 'hello!');
 
 -- --------------------------------------------------------
 

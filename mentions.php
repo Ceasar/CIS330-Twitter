@@ -29,7 +29,7 @@ function displayMentionedTweets() {
         }
         else {
             // mention found in message
-            //echo "<li>@". $row['usr'] ." tweeted ". $row['msg']."</li>";
+            echo "<li>@". $row['usr'] ." tweeted ". $row['msg']."</li>";
         }
         
     }
