@@ -17,7 +17,9 @@ include_once("./databaseTools.php");
 //user database. Sets session variables upon success.
 function auth_check_login($email, $password) {
 	//database query
-	$query = "SELECT * FROM users WHERE email = '".addslashes($email)."'";
+	$query = "SELECT * "
+				. "FROM users "
+				. "WHERE email = '".addslashes($email)."' or ID = '".addslashes($email)."'";
 	$result = run_sql($query);
 	$db_field = mysql_fetch_assoc($result);
 
@@ -30,7 +32,7 @@ function auth_check_login($email, $password) {
 		$userid = mysql_result($result, 0, "ID");
 	
 		//if email and corresponding password are valid
-		if(($email == $result_user) && ($password == $result_password)){
+		if(($email == $result_user || $email == $userid) && ($password == $result_password)){
 			//sets session variables
 			$_SESSION['userid'] = $userid;
 			$_SESSION['email'] = $email;
@@ -38,28 +40,10 @@ function auth_check_login($email, $password) {
 			$_SESSION['lastname'] = $result_lastname;
 			$_SESSION['username'] = $result_firstname . " " . $result_lastname;
 			$_SESSION['active'] = true;
-			echo $_SESSION['firstname'];
 			return true;
 		}
 	}
 	return false;
-}
-
-//Displays options after a successful login
-//TODO: I'm not sure if this is the best way to do this(?)
-function login_success(){
-	echo "Welcome " . $_SESSION['firstname'] . " " . $_SESSION['lastname'] . "</br>";
-	echo "<a href=\"./profile.php\">Go to Profile</a></br>";
-	echo "<a href=\"./profile.php\">Go to Control Panel</a></br>";
-	echo "<a href=\"./logout.php\">Log out</a></br>";
-}
-
-//Displays options after a login failure
-//TODO: I'm not sure if this is the best way to do this(?)
-function login_failure(){
-	echo "Login Failed.";
-	echo "<p align=\"center\">Need an Account?<br>
-			<a href=\"./accountCreation.php\">Register Here!</a></p>";
 }
 
 function display_login(){
