@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `messaged` (
   `MID` int(11) NOT NULL,
   `senderID` char(20) NOT NULL,
   `receiverID` char(20) NOT NULL,
-  PRIMARY KEY (`MID`,`senderID`,`receiverID`),
+  PRIMARY KEY (`MID`),
   KEY `senderID` (`senderID`),
   KEY `receiverID` (`receiverID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -172,10 +172,11 @@ CREATE TABLE IF NOT EXISTS `messaged` (
 --
 
 CREATE TABLE IF NOT EXISTS `messages` (
-  `ID` int(11) NOT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `message` char(140) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
+  PRIMARY KEY (`ID`),
+  KEY `ID` (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 
 -- --------------------------------------------------------
@@ -220,7 +221,8 @@ CREATE TABLE IF NOT EXISTS `tweets` (
   `private` tinyint(1) NOT NULL DEFAULT '0',
   `favorited` tinyint(1) NOT NULL DEFAULT '0',
   `message` char(140) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`ID`),
+  KEY `ID` (`ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --

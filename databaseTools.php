@@ -89,7 +89,7 @@ function db_searchForUser($searchtext){
  */
 function db_addTweet($user, $message, $private=false) {
 	//Validate input (Just length for now...)
-	if ( strlen($_POST['message'])>140 ) {
+	if (strlen($message)>140) {
 		return false;
 	}
 	$datetime =  date("Y-h-j g:i:s");
@@ -98,8 +98,13 @@ function db_addTweet($user, $message, $private=false) {
 	
 	//This creates a new tweet (The two queries need to run on the same connection for LAS_INSERT_ID() to work)
 	$queries = array();
+<<<<<<< HEAD
 	$queries[] = "INSERT INTO tweets(private, message, datetime)"
 			.    "VALUES(". ($private?"TRUE":"FALSE") .",'". addslashes($_POST['message']) ."','$datetime')";
+=======
+	$queries[] = "INSERT INTO tweets(private, message)"
+			.    "VALUES(". ($private?"TRUE":"FALSE") .",'". addslashes($message) ."')";
+>>>>>>> e6d5ece65042b5589e572e7bdb697a77952f1911
 	$queries[] = "INSERT INTO tweeted(tID, userID)"
 			.    "VALUES(LAST_INSERT_ID(),'". addslashes($user) ."')";
 	$results = run_statements($queries);
@@ -113,11 +118,11 @@ function db_addTweet($user, $message, $private=false) {
 	return true;
 }
 
-/* Actually facilitates submitting tweets to the db.
+/* Actually facilitates submitting messages to the db.
  * Args: $user - the username (id)
+ *	 $receiver - message recipient (id)
  *       $message - the message text
- *       $private - whether the message should be private
- * Returns: Boolean whether the tweet was successfully added.
+ * Returns: Boolean whether the message was successfully added.
  */
 function db_addMessage($user, $receiver, $message) {
 	//Validate input (Just length for now...)
@@ -149,15 +154,6 @@ function db_getUserById($id) {
 	$query = "SELECT * "
 	   . "FROM users "
 	   . "WHERE users.id='".$id."'";
-	$result = run_sql($query);
-	return mysql_fetch_array($result);
-}
-
-//Gets a list by its id
-function db_getListById($id) {
-	$query = "SELECT * "
-	   . "FROM lists "
-	   . "WHERE lists.id='".$id."'";
 	$result = run_sql($query);
 	return mysql_fetch_array($result);
 }
