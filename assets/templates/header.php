@@ -7,13 +7,13 @@
 	<!-- TODO: Float nav elements next to each other in individual buttons -->
 	<ul id="navContainer">
 		<!-- If the user is logged in show him the site navigation. Otherwise just allow them to login or create an account -->
-		<?php if (isset($_SESSION['username'])) { ?>
-			<li><a href="./profile.php"/>Home</a></li>
+		<?php if (isset($_SESSION['id'])) { ?>
+			<li><a href="./profile.php?id=<?php echo $_SESSION['id']?>"/>Profile</a></li>
 			<li><a href="./feed.php">News Feed</a></li>
 			<li><a href="./usercp.php">User CP</a></li>
 			<li><a href="./logout.php">Logout</a></li>
 			<li><form name="form" action="search.php" method="get">
-  				<input type="text" name="search_text" />
+  				<input type="text" name="search_text" value="Username or Lastname" size = 25 onfocus="value=''"/>
   				<input type="submit" name="search_submit" value="Search" />
 			</form></li>
 		<?php } else { ?>

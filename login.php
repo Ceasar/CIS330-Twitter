@@ -34,7 +34,7 @@ function auth_check_login($email, $password) {
 		//if email and corresponding password are valid
 		if(($email == $result_user || $email == $userid) && ($password == $result_password)){
 			//sets session variables
-			$_SESSION['userid'] = $userid;
+			$_SESSION['id'] = $userid;
 			$_SESSION['email'] = $email;
 			$_SESSION['firstname'] = $result_firstname;
 			$_SESSION['lastname'] = $result_lastname;
@@ -48,7 +48,7 @@ function auth_check_login($email, $password) {
 
 function display_login(){
 	//if user is already logged in
-	if (isset($_SESSION['userid'])) {
+	if (isset($_SESSION['id'])) {
 		echo "You are already logged in.";
 	}
 	//if user is NOT logged in, display form

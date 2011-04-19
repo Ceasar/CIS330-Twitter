@@ -17,8 +17,10 @@ function execute_search(){
 
 	$result = db_searchForUser($trimmed);
 	
+	echo "<h2>Search Results</h2>";
 	while ($row=mysql_fetch_array($result)) {
-		echo $row['last_name'] . "\n";
+		echo "<a href=\"./profile.php?id=" . $row['id'] . "\">"
+				. $row['id'] . " - " . $row['first_name'] . " " . $row['last_name'] ."</a>";
 	}
 }
 ?>

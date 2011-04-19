@@ -2,6 +2,14 @@
 //Includes:
 session_start();
 include_once("./databaseTools.php");
+
+<<<<<<< HEAD
+=======
+//DEBUG
+//$_SESSION['id'] = 0; //Fake a session
+//$_SESSION['username'] = "userA";
+
+>>>>>>> 6338bcd58068230ed7049fd5d68144b1522c826b
 //Page-specific
 //-------------
 
@@ -111,15 +119,19 @@ function followButton() {
 	//See if the user is even logged in
 	if ( isset($_SESSION['username']) ) {
 		//Check to see if we are already following the person.
-		if (count($followers) {
+		if (count($followers) != 0){
+			echo "1";
 			if (isset($_POST['unfollow'])) {
+				echo "2";
 				$user = $_SESSION['id'];
 				$person = $_GET['id'];
 				db_removeFollower($user, $person);
 			} else{
+				echo "3";
 				//Loop through the set of followers
 				foreach ($followers as $follower) {
 					if ($follower['ID'] == $_SESSION['id']){
+						echo "UNFOLLOW BUTTON";
 							createUnfollowForm();
 							return;
 					}
@@ -135,6 +147,7 @@ function followButton() {
 			?>Following<?php
 		} else {
 			//If we aren't following then create a follow button.
+			echo "FOLLOW BUTTON";
 			createFollowForm();
 		}
 	}
