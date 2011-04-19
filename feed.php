@@ -20,7 +20,8 @@ function displayNewsFeed() {
 	//Query the db for all tweets/PMs related to the current user
 	$query = "SELECT users.id as usr, tweets.message as msg, tweets.id as id\n"
 		   . "FROM users, tweeted, tweets\n"
-		   . "WHERE users.id=tweeted.userid and tweeted.tid=tweets.id";
+		   . "WHERE users.id=tweeted.userid and tweeted.tid=tweets.id\n"
+		   . "ORDER BY tweets.datetime DESC";
 	$result = run_sql($query);
 	//Loop through the set of tweets
 	while ( $row=mysql_fetch_array($result) ) {
