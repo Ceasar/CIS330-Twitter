@@ -35,7 +35,7 @@ function run_sql($query) {
 function run_statements($queries) {
 	//Auth Vars.
 	$dbUsername="root";
-	$dbPassword="";
+	$dbPassword="root";
 	$database="default";
 	
 	//Connect to the db
