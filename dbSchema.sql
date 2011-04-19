@@ -214,6 +214,7 @@ INSERT INTO `tweets` (`ID`, `private`, `message`) VALUES
 
 CREATE TABLE IF NOT EXISTS `users` (
   `ID` char(20) NOT NULL,
+  `password` char(50) DEFAULT NULL,
   `first_name` char(50) DEFAULT NULL,
   `last_name` char(50) DEFAULT NULL,
   `email` char(50) DEFAULT NULL,
@@ -230,9 +231,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`ID`, `first_name`, `last_name`, `email`, `private`, `lang`, `bio`, `location`, `URL`, `birthday`) VALUES
-('userA', 'john', 'doe', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('userB', 'jake', 'jakerson', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `users` (`ID`, `password`, `first_name`, `last_name`, `email`, `private`, `lang`, `bio`, `location`, `URL`, `birthday`) VALUES
+('userA', 'password', 'john', 'doe', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('userB', 'password', 'jake', 'jakerson', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Constraints for dumped tables
