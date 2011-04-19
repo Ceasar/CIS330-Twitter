@@ -44,7 +44,6 @@ function displayUserTweets() {
 		$fids = db_getFollowerIds($id);
 		if (in_array($_SESSION['id'], $fids)){
 			$tweets = db_getUserTweets($id);
-			echo "Total tweets: ".count($tweets);
 			//Loop through the set of tweets
 			foreach ($tweets as $tweet) {
 				echo "<li>@". $first ." tweeted ". $tweet['msg'] ."</li>";
@@ -54,7 +53,6 @@ function displayUserTweets() {
 		}
 	} else {
 		$tweets = db_getUserTweets($id);
-		echo "Total tweets: ".count($tweets);
 		//Loop through the set of tweets
 		foreach ($tweets as $tweet) {
 			echo "<li>@". $first ." tweeted ". $tweet['msg'] ."</li>";
@@ -64,7 +62,6 @@ function displayUserTweets() {
 
 function displayFollowers() {
 	global $followers;
-	echo "Being followed by ".count($followers)." people.";
 	//Loop through the set of followers
 	foreach ($followers as $follower) {
 		$first_name = $follower['first_name'];
@@ -77,7 +74,6 @@ function displayFollowers() {
 function displayFollowing() {
 	global $id;
 	$following = db_getFollowing($id);
-	echo "Following ".count($following)." people.";
 	//Loop through the set of following
 	foreach ($following as $followed) {
 		$first_name = $followed['first_name'];
