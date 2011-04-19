@@ -35,7 +35,7 @@ function run_sql($query) {
 function run_statements($queries) {
 	//Auth Vars.
 	$dbUsername="root";
-	$dbPassword="root";
+	$dbPassword="";
 	$database="default";
 	
 	//Connect to the db
@@ -112,11 +112,11 @@ function db_addTweet($user, $message, $private=false) {
 	return true;
 }
 
-/* Actually facilitates submitting tweets to the db.
+/* Actually facilitates submitting messages to the db.
  * Args: $user - the username (id)
+ *	 $receiver - message recipient (id)
  *       $message - the message text
- *       $private - whether the message should be private
- * Returns: Boolean whether the tweet was successfully added.
+ * Returns: Boolean whether the message was successfully added.
  */
 function db_addMessage($user, $receiver, $message) {
 	//Validate input (Just length for now...)
