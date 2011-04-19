@@ -34,8 +34,8 @@ function displayUserFeed() {
 	global $id;
 	$tweets = db_getUserTweets($id);
 	//Loop through the set of tweets
-	while ( $row=mysql_fetch_array($tweets) ) {
-		echo "<li>@". $row['usr'] ." tweeted ". $row['msg'] ."</li>";
+	foreach ($tweets as $tweet) {
+		echo "<li>@". $tweet['usr'] ." tweeted ". $tweet['msg'] ."</li>";
 	}
 }
 

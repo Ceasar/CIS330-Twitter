@@ -118,7 +118,7 @@ function db_getUserTweets($id) {
 		   . "FROM users, tweeted, tweets\n"
 		   . "WHERE users.id=". $id ." and users.id=tweeted.userid and 
 tweeted.tid=tweets.id";
-	$result = run_sql($query);\
+	$result = run_sql($query);
 	$tweets = array();
 	while ( $tweet=mysql_fetch_array($result) ) {
 		$tweets[] = $tweet;
