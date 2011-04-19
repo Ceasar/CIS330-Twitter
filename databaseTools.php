@@ -89,7 +89,7 @@ function db_searchForUser($searchtext){
  */
 function db_addTweet($user, $message, $private=false) {
 	//Validate input (Just length for now...)
-	if ( strlen($_POST['message'])>140 ) {
+	if (strlen($message)>140) {
 		return false;
 	} 
 	
@@ -98,7 +98,7 @@ function db_addTweet($user, $message, $private=false) {
 	//This creates a new tweet (The two queries need to run on the same connection for LAS_INSERT_ID() to work)
 	$queries = array();
 	$queries[] = "INSERT INTO tweets(private, message)"
-			.    "VALUES(". ($private?"TRUE":"FALSE") .",'". addslashes($_POST['message']) ."')";
+			.    "VALUES(". ($private?"TRUE":"FALSE") .",'". addslashes($message) ."')";
 	$queries[] = "INSERT INTO tweeted(tID, userID)"
 			.    "VALUES(LAST_INSERT_ID(),'". addslashes($user) ."')";
 	$results = run_statements($queries);

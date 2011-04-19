@@ -74,7 +74,7 @@ function createPostForm($text, $default=true) {
 function submitTweet() {
 	//Get the submitted values
 	$msg = $_POST['message'];
-	$usr = ($_SESSION['username']);
+	$usr = ($_SESSION['id']);
 	
 	//Determine privacy setting from checkbox
 	$priv = false;
