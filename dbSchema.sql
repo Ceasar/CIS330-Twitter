@@ -327,7 +327,7 @@ ALTER TABLE `mentions`
 -- Constraints for table `messaged`
 --
 ALTER TABLE `messaged`
-  ADD CONSTRAINT `messaged_ibfk_1` FOREIGN KEY (`MID`) REFERENCES `tweets` (`ID`),
+  ADD CONSTRAINT `messaged_ibfk_1` FOREIGN KEY (`MID`) REFERENCES `messages` (`ID`),
   ADD CONSTRAINT `messaged_ibfk_2` FOREIGN KEY (`senderID`) REFERENCES `users` (`ID`),
   ADD CONSTRAINT `messaged_ibfk_3` FOREIGN KEY (`receiverID`) REFERENCES `users` (`ID`);
 
