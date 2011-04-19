@@ -22,6 +22,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 CREATE TABLE IF NOT EXISTS `follows` (
   `follower` char(20) NOT NULL,
   `followee` char(20) NOT NULL,
+  `approved` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`follower`,`followee`),
   KEY `followee` (`followee`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
