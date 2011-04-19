@@ -26,15 +26,16 @@ function displayNewsFeed() {
 	}
 }
 
-function displayUserFeed() {
-	//Query the db for all tweets/PMs related to the current user
-	$query = "SELECT users.id as usr, tweets.message as msg\n"
-		   . "FROM users, tweeted, tweets\n"
-		   . "WHERE users.id=tweeted.userid and tweeted.tid=tweets.id";
-	$result = run_sql($query);
-	//Loop through the set of tweets
-	while ( $row=mysql_fetch_array($result) ) {
-		echo "<li>@". $row['usr'] ." tweeted ". $row['msg'] ."</li>";
+//Displays a user's feed.
+function displayUserFeed($id) {
+	$following = db_getFollowing($id);
+	//Loop through the set of following
+	foreach ($following as $followed) {
+		$name = $followed['first_name'];
+		$tweets = db_getUserTweets($followed['id']);
+		foreach ($tweets as $tweet) {
+			echo "<li>@". $name ." tweeted ". $tweet['msg'] ."</li>";
+		}
 	}
 }
 
