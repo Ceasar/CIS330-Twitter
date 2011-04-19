@@ -128,34 +128,13 @@ CREATE TABLE IF NOT EXISTS `mentions` (
 
 CREATE TABLE IF NOT EXISTS `messaged` (
   `MID` int(11) NOT NULL,
-  `senderID` char(20) NOT NULL,
-  `receiverID` char(20) NOT NULL,
-  PRIMARY KEY (`MID`,`senderID`,`receiverID`),
-  KEY `senderID` (`senderID`),
-  KEY `receiverID` (`receiverID`)
-  
+  `userID` char(20) NOT NULL,
+  PRIMARY KEY (`MID`,`userID`),
+  KEY `userID` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `messaged`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `messages`
---
-
-CREATE TABLE IF NOT EXISTS `messages` (
-  `ID` int(11) NOT NULL,
-  `message` char(140) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `ID` (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
-
---
--- Dumping data for table `messages`
 --
 
 
@@ -199,6 +178,7 @@ INSERT INTO `tweeted` (`TID`, `userID`) VALUES
 CREATE TABLE IF NOT EXISTS `tweets` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `private` tinyint(1) NOT NULL DEFAULT '0',
+  `favorited` tinyint(1) NOT NULL DEFAULT '0',
   `message` char(140) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `ID` (`ID`)
@@ -208,24 +188,24 @@ CREATE TABLE IF NOT EXISTS `tweets` (
 -- Dumping data for table `tweets`
 --
 
-INSERT INTO `tweets` (`ID`, `private`, `message`) VALUES
-(1, 0, 'hi there!'),
-(2, 0, 'Sup d00d?'),
-(4, 0, 'hello!'),
-(5, 1, 'hey man'),
-(6, 0, 'whats up?dds'),
-(7, 0, 'hwdwd'),
-(8, 0, 'hdwcs'),
-(9, 0, 'hello world\r\n!'),
-(11, 0, 'Hello WORLDSzzz!'),
-(12, 0, 'NewONE!'),
-(13, 0, 'wsadsadpppppppp'),
-(14, 0, 'all'),
-(15, 0, 'hows it goin?'),
-(16, 0, 'my tweet?\r\n'),
-(17, 0, 'new tewaets?\r\n'),
-(18, 0, 'posting da tweats\r\nstuff'),
-(19, 0, 'hello!');
+INSERT INTO `tweets` (`ID`, `private`, `favorited`, `message`) VALUES
+(1, 0, 0, 'hi there!'),
+(2, 0, 0, 'Sup d00d?'),
+(4, 0, 0, 'hello!'),
+(5, 1, 0, 'hey man'),
+(6, 0, 0, 'whats up?dds'),
+(7, 0, 0, 'hwdwd'),
+(8, 0, 0, 'hdwcs'),
+(9, 0, 0, 'hello world\r\n!'),
+(11, 0, 0, 'Hello WORLDSzzz!'),
+(12, 0, 0, 'NewONE!'),
+(13, 0, 0, 'wsadsadpppppppp'),
+(14, 0, 0, 'all'),
+(15, 0, 0, 'hows it goin?'),
+(16, 0, 0, 'my tweet?\r\n'),
+(17, 0, 0, 'new tewaets?\r\n'),
+(18, 0, 0, 'posting da tweats\r\nstuff'),
+(19, 0, 0, 'hello!');
 
 -- --------------------------------------------------------
 
@@ -298,9 +278,8 @@ ALTER TABLE `mentions`
 -- Constraints for table `messaged`
 --
 ALTER TABLE `messaged`
-  ADD CONSTRAINT `messaged_ibfk_1` FOREIGN KEY (`MID`) REFERENCES `messages` (`ID`),
-  ADD CONSTRAINT `messaged_ibfk_2` FOREIGN KEY (`senderID`) REFERENCES `users` (`ID`),
-  ADD CONSTRAINT `messaged_ibfk_3` FOREIGN KEY (`receiverID`) REFERENCES `users` (`ID`);
+  ADD CONSTRAINT `messaged_ibfk_1` FOREIGN KEY (`MID`) REFERENCES `tweets` (`ID`),
+  ADD CONSTRAINT `messaged_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`ID`);
 
 --
 -- Constraints for table `tweeted`
