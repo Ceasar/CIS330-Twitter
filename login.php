@@ -28,6 +28,7 @@ function auth_check_login($email, $password) {
 		$result_password = mysql_result($result, 0, "password");
 		$result_user = mysql_result($result, 0, "email");
 		$result_firstname = mysql_result($result, 0, "first_name");
+		$result_location = mysql_result($result, 0, "location");
 		$result_lastname = mysql_result($result, 0, "last_name");
 		$userid = mysql_result($result, 0, "ID");
 	
@@ -37,6 +38,7 @@ function auth_check_login($email, $password) {
 			$_SESSION['id'] = $userid;
 			$_SESSION['email'] = $email;
 			$_SESSION['firstname'] = $result_firstname;
+			$_SESSION['location'] = $result_location;
 			$_SESSION['lastname'] = $result_lastname;
 			$_SESSION['username'] = $result_firstname . " " . $result_lastname;
 			$_SESSION['active'] = true;

@@ -165,6 +165,17 @@ function db_getUserTweets($id) {
 	return $tweets;
 }
 
+//Query the db for all tweets/PMs related to the current user
+function db_getFavoriteTweets($id) {
+	$query = "SELECT users.id as usr, tweets.message as msg\n"
+		   . "FROM users, tweeted, tweets, favorites\n"
+		   . "WHERE users.id='$id' and users.id=tweeted.userid and tweeted.tid=tweets.id and favorites.tid=tweets.id and favorites.uid=user.id\n"
+		   . "ORDER BY tweets.datetime DESC";
+	$result = run_sql($query);
+	$tweets = to_array($result);
+	return $tweets;
+}
+
 /* Facilitates follower requests to the db.
  * Args: $id - the user id
  * Returns: A list of followers.
@@ -187,7 +198,7 @@ function db_getFollowerIds($id) {
 	//Query the db for followers of the profiled user
 	$query = "SELECT users.id "
 		   . "FROM users, follows "
-		   . "WHERE followee=".$id." and users.id=follower";
+		   . "WHERE followee='$id' and users.id=follower";
 	$result = run_sql($query);
 	$followers = to_array($result);
 	return $followers;
