@@ -1,7 +1,5 @@
 <?php
-
-
-
+session_start();
 /* Send private message page
  *
  */
