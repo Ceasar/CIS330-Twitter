@@ -21,10 +21,10 @@ include_once("./databaseTools.php");
 
 <?php include_once("./assets/templates/header.php");?>
 
-<!-- Unique page content goes here. -->
+<!-- Unique page content goes here. 
 <div id="content">
-
-</div> <!-- End Content Div -->
+</div> 
+		no content for index.php -->	
 
 
 <?php include_once("./assets/templates/footer.php");?>
