@@ -218,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `first_name` char(50) DEFAULT NULL,
   `last_name` char(50) DEFAULT NULL,
   `email` char(50) DEFAULT NULL,
-  `private` char(50) DEFAULT NULL,
+  `private` tinyint(1) DEFAULT '0',
   `lang` char(50) DEFAULT NULL,
   `bio` char(50) DEFAULT NULL,
   `location` char(50) DEFAULT NULL,
