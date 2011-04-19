@@ -15,18 +15,24 @@ $id = $user['ID'];
 $private = $user['private'];
 $first = $user['first_name'];
 $last = $user['last_name'];
-$location = $user['location'];
-$bio = $user['bio'];
-$url = $user['URL'];
 $followers = db_getFollowers($id);
 
 function displayUserProfile() {
-	global $first, $last, $location, $bio, $url;
+	global $user;
+	$first = $user['first_name'];
+	$last = $user['last_name'];
+	$location = $user['location'];
+	$bio = $user['bio'];
+	$url = $user['URL'];
+	$email = $user['email'];
+	$language = $user['lang'];
 	?>
 	<h2><?php echo $first." ".$last; ?></h2>
 	<span>Location: <?php echo $location;?></span>
 	<p>Bio: <?php echo $bio;?></p>
 	<p>URL: <a href="<?php echo $url;?>"/><?php echo $url;?></a></p>
+	<p>Email: <?php echo $email;?></p>
+	<p>Language: <?php echo $language;?></p>
 	<?php
 }
 
@@ -128,6 +134,7 @@ function followButton() {
 ?>
 
 <html>
+<?php include_once("./assets/templates/head.php");?>
 
 <head>
 	<!-- This makes the title display the username if the client is logged in -->
@@ -138,13 +145,12 @@ function followButton() {
 			}
 		?>
 	</title>
-	<link rel="stylesheet" href="styles.css" type="text/css"">
+	<link rel="stylesheet" href="styles.css" type="text/css">
 </head>
 
 <body>
-	<div id="header">
-		<h1>Twitter Project</h1>
-	</div>
+
+<?php include_once("./assets/templates/header.php");?>
 	
 	<div id="content">
 		<div id="main-content">
@@ -186,6 +192,9 @@ from the db -->
 		</div>
 		 
 	</div>
+
+<?php include_once("./assets/templates/footer.php");?>
+
 </body>
 
 </html>
