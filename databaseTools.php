@@ -9,7 +9,7 @@
  //Runs an SQL query.
 function run_sql($query) {
 	$dbUsername="root";
-	$dbPassword="";
+	$dbPassword="root";
 	$database="default";
 	
 	$connection = mysql_connect("localhost",$dbUsername,$dbPassword);
@@ -58,6 +58,16 @@ function run_statements($queries) {
  * user, etc.
  */
 
+/* Executes a search. For now, searches by last name.
+ * Args: $searchtext - desired search (last name)
+ * Returns: array of users matching query
+ */
+function db_searchForUser($searchtext){
+	$query = "SELECT first_name, last_name FROM users WHERE last_name LIKE '%" . $searchtext . "%'";
+	$results = run_sql($query);
+	return $results;
+	
+}
 
 /* Actually facilitates submitting tweets to the db.
  * Args: $user - the username (id)
