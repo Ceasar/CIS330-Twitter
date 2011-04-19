@@ -125,8 +125,8 @@ function db_getUserById($id) {
 function db_getUserTweets($id) {
 	$query = "SELECT users.id as usr, tweets.message as msg\n"
 		   . "FROM users, tweeted, tweets\n"
-		   . "WHERE users.id='$id' and users.id=tweeted.userid and tweeted.tid=tweets.id"
-		   . "ORDER BY tweet.datetime DSC";
+		   . "WHERE users.id='$id' and users.id=tweeted.userid and tweeted.tid=tweets.id\n"
+		   . "ORDER BY tweets.datetime DESC";
 	$result = run_sql($query);
 	$tweets = to_array($result);
 	return $tweets;
