@@ -22,7 +22,7 @@ $last = $user['last_name'];
 $location = $user['location'];
 $bio = $user['bio'];
 $url = $user['URL'];
-$followers = getFollowers();
+$followers = db_getFollowers($id);
 
 function displayUserProfile() {
 	global $first, $last, $location, $bio, $url;
@@ -46,21 +46,6 @@ tweeted.tid=tweets.id";
 	while ( $row=mysql_fetch_array($result) ) {
 		echo "<li>@". $row['usr'] ." tweeted ". $row['msg'] ."</li>";
 	}
-}
-
-function getFollowers() {
-	global $id;
-	//Query the db for followers of the profiled user
-	$query = "SELECT * "
-		   . "FROM users, follows "
-		   . "WHERE followee=".$id." and users.id=follower";
-	$result = run_sql($query);
-	//Loop through the set of followers
-	$followers = array();
-	while ( $follower=mysql_fetch_array($result) ) {
-		$followers[] = $follower;
-	}
-	return $followers;
 }
 
 function displayFollowers() {

@@ -104,6 +104,24 @@ function db_addTweet($user, $message, $private=false) {
 }
 
 /* Facilitates follower requests to the db.
+ * Args: $id - the user id
+ * Returns: A list of followers.
+ */
+function db_getFollowers($id) {
+	//Query the db for followers of the profiled user
+	$query = "SELECT * "
+		   . "FROM users, follows "
+		   . "WHERE followee=".$id." and users.id=follower";
+	$result = run_sql($query);
+	//Loop through the set of followers
+	$followers = array();
+	while ( $follower=mysql_fetch_array($result) ) {
+		$followers[] = $follower;
+	}
+	return $followers;
+}
+
+/* Facilitates follower requests to the db.
  * Args: $user - the username (id)
  *       $person - the message text
  * Returns: Boolean whether the tweet was successfully added.
