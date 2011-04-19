@@ -104,7 +104,7 @@ function editForm($first, $last, $email, $private, $lang, $bio, $location, $url,
     
     <div id="content">
     
-        <div id="createAccount">
+        <div class = "box" id="accountCreate">
             <h2>Edit Profile:</h2>
             <?php 
                 editAccountWidget();

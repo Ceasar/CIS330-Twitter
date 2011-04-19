@@ -33,7 +33,9 @@ function createAccountForm() {
 
 <!-- Unique page content goes here. -->
 <div id="content">
+	<div class="box" id = "accountCreate">
     	<?php createAccountForm(); ?>
+    </div>
 </div> <!-- End Content Div -->
 
 </body>

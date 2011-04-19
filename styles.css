@@ -2,12 +2,23 @@
  *  General Styles
  * =================
  */
+ 
 
- h2 {
+h2 {
 	font-size: 14;
 	margin: 3px 3px;
- }
- 
+}
+
+a:hover{
+	background: #CC3333;
+	}
+	a:visited{
+	color: blue;
+	}
+body{
+	background-image: url(assets/images/clouds.jpg);
+	height: 1000px;
+}
 /* With the template, we can probably remove this...
  * I just commented out #content because it 
  * conflicts with the new templating system
@@ -18,30 +29,36 @@
 	margin: 0 auto 0 auto;
 }
 */
-
-#main-content{
-	width: 540px;
+.main-content {
+	width: 900px;
 	display: inline-block;
-	z-index: 4;
-	position: relative;
+	z-index: 4; position : relative;
 	background: white;
-	height: 100%;
+	height: 800px;
+	margin-left: 5%;
+	margin-right: 5%;
+	position: relative;
 }
 
-#dashboard{
+#dashboard {
 	min-width: 340px;
 	position: relative;
 	background: #F9F9F9;
 	padding: 12px 20px;
 }
 
+.scrollbox {
+	height: 300px;
+	width: 380px;
+	overflow: scroll;
+}
 
 /* =================
  *  Template Styles
  * =================
  */
-#header, #content, #footer {
-	margin: 0 auto 0 auto;
+#header,#content,#footer {
+	font-family: Georgia, Garamond, Serif; margin : 0 auto 0 auto;
 	padding: 5px;
 	border: 1px solid #ccc;
 	border-top-style: none;
@@ -50,17 +67,18 @@
 	width: 1000px;
 	background: #F9F9F9;
 	align: center;
+	margin: 0 auto 0 auto;
 }
 
 #header {
 	border-top-style: solid;
-	background: #5077ff;
-	min-height: 100px;
+	background: #3380CC;
+	min-height: 105px;
+	
 }
 
 #header:after {
 	clear: both;
-
 }
 
 #headLogo {
@@ -69,7 +87,7 @@
 	border: 1px solid #ccc;
 	-moz-border-radius: 15px;
 	border-radius: 15px;
-	float:left;
+	float: left;
 	margin-right: 10px;
 }
 
@@ -80,7 +98,7 @@
 
 /* Formatting for the nav bar */
 ul#navContainer {
-	float:left;
+	float: left;
 	padding: 0;
 	list-style: none;
 	width: 650px;
@@ -89,7 +107,7 @@ ul#navContainer {
 ul#navContainer li {
 	width: 100%;
 	height: 100%;
-	display:inline;
+	display: inline;
 }
 
 ul#navContainer li a {
@@ -97,21 +115,23 @@ ul#navContainer li a {
 	text-align: center;
 	width: 100px;
 	padding: 5px 2px;
-	background: #4eedff;
+	background: #00b1db;
 	color: #000;
 	border: 1px solid #666;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
-	float:left;
+	float: left;
 }
+ul#navContainer li a:hover{
+	background: #9595E4;
+	}
 
-ul#navContainer li:first-child a {
-	/*border-left-style: solid; */
+ul#navContainer li:first-child a { /*border-left-style: solid; */
+	
 }
 
 #content {
-	min-height: 200px;
-	/*text-align: center;*/
+	min-height: 410px;
 	/*Hmm...*/
 }
 
@@ -120,23 +140,75 @@ ul#navContainer li:first-child a {
 	font-size: 12px;
 	background: #E9E9F9;
 }
+
 #footer a {
 	text-decoration: none;
 }
-
 
 /* =================
  *  feed.php Styles
  * =================
  */
+.box {
+	float: left;
+	width: 430px;
+	height: 370px;
+	border: 1px solid;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+	font: 16px/26px Georgia, Garamond, Serif;
+	padding: 5px;
+	background: CCE6FF;
+}
+
+.box h2 {
+	text-align: center;
+}
+
+#createTweet {
+	text-align: center;
+	width: 350px;
+}
+
+#newsFeed {
+	height: 500px;
+	width: 500px;
+	text-align: center;
+}
+
+#newsBox {
+	width: 450px;
+	height: 420px;
+}
+
 ul#newsList {
 	list-style: none;
-	border: 1px solid #ccc;
-	width: 300px;
-	margin: 5px 0;
+	width: 440px;
+	float: left;
 }
 
-ul#newsList li {
-	width:100%;
-}
+.tweet{
+	border: 1px solid;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+	background: #F9F9F9;
+	}
+.tweet:hover{
+	border: 1px solid;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+	background: #3380CC;
+	}
+	
+#recs{
+	margin-left: 25%;
+	}
+	
+#accountCreate{
+	margin-left: 25%;
+	width: 550px;
+	}
 
+	h1{
+	font-family: "Perpetua";
+	}

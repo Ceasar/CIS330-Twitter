@@ -45,16 +45,26 @@ function displayMentionedTweets() {
 
 <?php include_once("./assets/templates/header.php");?>
 
-<!-- Unique page content -->
-<div id="content">
-    <ul id="mentionList">
-        <?php displayMentionedTweets(); ?>
-    </ul>
-    
-    <?php addTweetWidget(); ?>
-</div>
+	<!-- Unique page content -->
+	<div id="content">
+		<ul id="mentionList">
+			<div class="box">
+				<h2>Mentions</h2>
+				<a href="./feed.php">Tweets</a> <a
+					href="./mentions.php?id=<?php echo $_SESSION['id']?>">Mentions</a>
+				<a href="./privateMessages.php">Private Messages</a>
+				<div class="scrollbox">
+				<?php displayMentionedTweets(); ?>
+				</div>
+		</ul>
+		<div class="box" id="createTweet">
+		<?php addTweetWidget(); ?>
+		</div>
+	</div>
+	
+	</div>
 
-<?php include_once("./assets/templates/footer.php");?>
+	<?php include_once("./assets/templates/footer.php");?>
 
 </body>
 </html>

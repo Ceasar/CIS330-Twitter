@@ -1,4 +1,4 @@
 <div id="footer">
 	<!-- Just a placeholder -->
-	<a href="#">Link 1</a> | <a href="#">Link 2</a> | <a href="#">Link 3</a>
+	<a href="http://twitter.com">Twitter</a> | <a href="http://www.seas.upenn.edu/~cis330/">CIS 330</a> | <a href="http://www.google.com">Google</a>
 </div> <!-- End Footer Div -->

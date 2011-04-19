@@ -66,10 +66,12 @@ function displayFollowRecs() {
 
 <!-- Unique page content -->
 <div id="content">
+	<div class="box" id="recs">
     <ul id="recsList">
+    	<h2>Who You Should Follow!</h2>
         <?php displayFollowRecs(); ?>
     </ul>
-    
+    </div>
 </div>
 
 <?php include_once("./assets/templates/footer.php");?>

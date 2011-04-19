@@ -11,6 +11,7 @@
 			<li><a href="./profile.php?id=<?php echo $_SESSION['id']?>"/>Profile</a></li>
 			<li><a href="./feed.php">News Feed</a></li>
 			<li><a href="./usercp.php">User CP</a></li>
+			<li><a href="./follow_recs.php">Recs</a></li>
 			<li><a href="./logout.php">Logout</a></li>
 			<li><form name="form" action="search.php" method="get">
   				<input type="text" name="search_text" value="Username or Lastname" size = 25 onfocus="value=''"/>

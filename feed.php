@@ -19,21 +19,22 @@ error_reporting(E_ALL);
 function displayNewsFeed() {
 	//Query the db for all tweets/PMs related to the current user
 	$query = "SELECT users.id as usr, tweets.message as msg, tweets.id as id\n"
-		   . "FROM users, tweeted, tweets\n"
-		   . "WHERE users.id=tweeted.userid and tweeted.tid=tweets.id\n"
-		   . "ORDER BY tweets.datetime DESC";
+	. "FROM users, tweeted, tweets\n"
+	. "WHERE users.id=tweeted.userid and tweeted.tid=tweets.id\n"
+	. "ORDER BY tweets.datetime DESC";
 	$result = run_sql($query);
 	//Loop through the set of tweets
 	while ( $row=mysql_fetch_array($result) ) {
 		//print tweet with star if favorite
 		if(is_favorite($row['id'])){
-			echo "<li><img src=\"./assets/images/star.jpeg\">"
-					."<a href=\"./profile.php?id=" . $row['usr'] . "\">@" . $row['usr']. "</a> tweeted ". $row['msg'] ."</li>"; //print tweet
+			echo "<div class=\"tweet\"><li><img src=\"./assets/images/star.jpeg\">"
+			."<a href=\"./profile.php?id=" . $row['usr'] . "\">@" . $row['usr']. "</a> tweeted ". $row['msg'] ."</li>"; //print tweet
 		}
 		else{
-			echo "<li><a href=\"./profile.php?id=" . $row['usr'] . "\">@" . $row['usr']. "</a> tweeted ". $row['msg'] ."</li>"; 
+			echo "<div class=\"tweet\"><li><a href=\"./profile.php?id=" . $row['usr'] . "\">@" . $row['usr']. "</a> tweeted ". $row['msg'] ."</li>";
 		}
 		displayTweetOptions($row['id']);	//print options for tweet
+		echo "</div>";
 	}
 }
 
@@ -42,10 +43,13 @@ function displayUserFeed($id) {
 	$following = db_getFollowing($id);
 	//Loop through the set of following
 	foreach ($following as $followed) {
-		$name = $followed['first_name'];
-		$tweets = db_getUserTweets($followed['id']);
+		echo $followed[0];
+		$name = $followed[0]['first_name'];
+		$tweets = db_getUserTweets($followed[0]['id']);
+		echo $tweets[0];
 		foreach ($tweets as $tweet) {
-			echo "<li>@". $name ." tweeted ". $tweet['msg'] ."</li>";
+			echo $tweet;
+			echo "<li>@". $name ." tweeted ". $tweet[0]['msg'] ."</li>";
 		}
 	}
 }
@@ -93,26 +97,35 @@ function is_favorite($tid){
 
 <?php include_once("./assets/templates/header.php");?>
 
-<!-- Unique page content goes here. -->
-<div id="content">
-	
-	<div id="newsFeed">
-			<h2>News Feed:</h2>
-			<a href="./feed.php">Tweets</a>  <a href="./mentions.php?id=<?php echo $_SESSION['id']?>">Mentions</a>  <a href="./privateMessages.php">Private Messages</a>
-			<ul id="newsList">
-				<!-- This function populates the newsfeed list with elements from the db -->
-				<?php displayNewsFeed(); ?>
-			</ul>
+	<!-- Unique page content goes here. -->
+	<div id="content">
+		<div class="main-content">
+			<div class="box" id="newsFeed">
+				<h2>News Feed:</h2>
+				<a href="./feed.php">Tweets</a> <a
+					href="./mentions.php?id=<?php echo $_SESSION['id']?>">Mentions</a>
+				<a href="./privateMessages.php">Private Messages</a>
+				<ul id="newsList">
+					<!-- This function populates the newsfeed list with elements from the db -->
+					<div class="scrollbox" id="newsbox">
+					<?php displayNewsFeed(); ?>
+					</div>
+				</ul>
+			</div>
+
+			<div class="box" id="createTweet">
+				<!--  This draws a widget for submitting tweets. Exposed by 'newTweetWidget.php' -->
+				
+				<?php addTweetWidget(); ?>
+				
+			</div>
 		</div>
-		
-		<!--  This draws a widget for submitting tweets. Exposed by 'newTweetWidget.php' -->
-		<?php addTweetWidget(); ?>
 	</div>
-	
-</div> <!-- End Content Div -->
+	</div>
+	<!-- End Content Div -->
 
 
-<?php include_once("./assets/templates/footer.php");?>
+	<?php include_once("./assets/templates/footer.php");?>
 
 </body>
 </html>

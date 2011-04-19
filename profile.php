@@ -209,43 +209,44 @@ function messageButton() {
 <?php include_once("./assets/templates/header.php");?>
 	
 	<div id="content">
-		<div id="main-content">
-			<div id="userProfile">
-				<ul id="userProfile">
+		<div class="main-content">
+			<div class="box" id="userProfile">
+				<ul id="use">
 					<!-- This function shows the user profile. -->
 					<?php displayUserProfile(); ?>
 				</ul>
-			</div>
-			
 			<?php followButton(); messageButton(); ?>
-		
-			<div id="newsFeed">
-				<h2>Timeline:</h2>
+			</div>
+			<div class="box"  id="userTweets">
+				<h2>tweets:</h2>
 				<ul id="newsList">
 					<!-- This function populates the newsfeed list with elements from the db -->
-					<?php displayUserTweets(); ?>
+					<div class="scrollbox">
+						<?php displayUserTweets(); ?>
+					</div>
 				</ul>
 			</div>
-			<div id="favorites">
-				<h2>Favorites:</h2>
+			<div class="box"  id="favorites">
+				<h2>favorites:</h2>
 				<ul id="newsList">
 					<!-- This function populates the newsfeed list with elements from the db -->
-					<?php displayFavoriteTweets(); ?>
+					<div class="scrollbox">
+						<?php displayFavoriteTweets(); ?>
+					</div>
+				
 				</ul>
 			</div>
-		</div>
 		
-		<div id="dashboard">
-			<div id="newsFeed">
-				<h2>Followers:</h2>
+
+		
+			<div class="box"  id="followers">
+				<h2>followers:</h2>
 				<ul id="newsList">
 					<!-- This function populates the followers list. -->
 					<?php displayFollowers(); ?>
 				</ul>
-			</div>
-			
-			<div id="newsFeed">
-				<h2>Following:</h2>
+
+				<h2>following:</h2>
 				<ul id="newsList">
 					<!-- This function populates the following list. -->
 					<?php displayFollowing(); ?>
