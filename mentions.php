@@ -9,7 +9,7 @@ include_once("./databaseTools.php");
 include_once("./newTweetWidget.php");
 
 //DEBUG:
-//$_SESSION['userid'] = "userA"; //Fake a session
+//$_SESSION['id'] = "userA"; //Fake a session
 
 function displayMentionedTweets() {
 	//Query the db for all tweets
@@ -18,7 +18,7 @@ function displayMentionedTweets() {
                 . "WHERE users.id=tweeted.userid and tweeted.tid = tweets.id";
     $result = run_sql($query);
     //Loop through, pick out as necessary
-    $mention = "@" . $_SESSION['userid'];
+    $mention = "@" . $_SESSION['id'];
     while( $row=mysql_fetch_array($result) ){
         
         $pos = strpos($row['msg'],$mention);
