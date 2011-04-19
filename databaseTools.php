@@ -165,6 +165,17 @@ function db_getUserTweets($id) {
 	return $tweets;
 }
 
+//Query the db for all tweets/PMs related to the current user
+function db_getFavoriteTweets($id) {
+	$query = "SELECT users.id as usr, tweets.message as msg\n"
+		   . "FROM users, tweeted, tweets, favorites\n"
+		   . "WHERE users.id='$id' and users.id=tweeted.userid and tweeted.tid=tweets.id and favorites.tid=tweets.id and favorites.uid=user.id\n"
+		   . "ORDER BY tweets.datetime DESC";
+	$result = run_sql($query);
+	$tweets = to_array($result);
+	return $tweets;
+}
+
 /* Facilitates follower requests to the db.
  * Args: $id - the user id
  * Returns: A list of followers.
