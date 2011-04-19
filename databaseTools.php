@@ -5,6 +5,15 @@
  * @ignore
  * @package  Tools
  */
+ 
+ //Takes a list of tuples and turns them into a php array.
+ function to_array($result){
+	$array = array();
+	while ( $object=mysql_fetch_array($result) ) {
+		$array[] = $object;
+	}
+	return $array;
+}
 
  //Runs an SQL query.
 function run_sql($query) {
@@ -103,6 +112,54 @@ function db_addTweet($user, $message, $private=false) {
 	return true;
 }
 
+//Gets a user by his id
+function db_getUserById($id) {
+	$query = "SELECT * "
+	   . "FROM users "
+	   . "WHERE users.id='".$id."'";
+	$result = run_sql($query);
+	return mysql_fetch_array($result);
+}
+
+//Query the db for all tweets/PMs related to the current user
+function db_getUserTweets($id) {
+	$query = "SELECT users.id as usr, tweets.message as msg\n"
+		   . "FROM users, tweeted, tweets\n"
+		   . "WHERE users.id=". $id ." and users.id=tweeted.userid and 
+tweeted.tid=tweets.id";
+	$result = run_sql($query);
+	$tweets = to_array($result);
+	return $tweets;
+}
+
+/* Facilitates follower requests to the db.
+ * Args: $id - the user id
+ * Returns: A list of followers.
+ */
+function db_getFollowers($id) {
+	//Query the db for followers of the profiled user
+	$query = "SELECT * "
+		   . "FROM users, follows "
+		   . "WHERE followee=".$id." and users.id=follower";
+	$result = run_sql($query);
+	$followers = to_array($result);
+	return $followers;
+}
+
+/* Facilitates follower requests to the db.
+ * Args: $id - the user id
+ * Returns: A list of people that the user is following.
+ */
+function db_getFollowing($id) {
+	//Query the db for followers of the profiled user
+	$query = "SELECT * "
+		   . "FROM users, follows "
+		   . "WHERE follower=".$id." and users.id=followee";
+	$result = run_sql($query);
+	$following = to_array($result);
+	return $following;
+}
+
 /* Facilitates follower requests to the db.
  * Args: $user - the username (id)
  *       $person - the message text
@@ -111,10 +168,16 @@ function db_addTweet($user, $message, $private=false) {
 function db_addFollower($user, $person) {
 	//Build the queries for the database
 	
+	$approved = 1;
+	$private = $person['private'];
+	if ($private){
+		$approved = 0;
+	}
+	
 	//This creates a new tweet (The two queries need to run on the same connection for LAS_INSERT_ID() to work)
 	$queries = array();
-	$queries[] = "INSERT INTO follows(follower, followee)"
-			.    "VALUES(". $user .",". $person .")";
+	$queries[] = "INSERT INTO follows(follower, approved, followee)"
+			.    "VALUES(". $user .",". $approved .",". $person .")";
 	$results = run_statements($queries);
 	
 	//Make sure the insert succeeded
@@ -123,6 +186,29 @@ function db_addFollower($user, $person) {
 	}
 	
 	//If we get here, everything worked
+	return true;
+}
+
+//Gets the ids of unapproved followers.
+function db_getUnapproved($id){
+	$query = "SELECT users.id "
+		   . "FROM users, follows "
+		   . "WHERE followee=".$id." and users.id=follower and approved='0'";
+	$result = run_sql($query);
+	$unapproved = to_array($result);
+	return $unapproved;
+}
+
+/* Facilitates follower requests to the db.
+ * Args: $id - the id of the approved person
+ *       $ud - the id of the approver
+ * Returns: Boolean whether the tweet was successfully added.
+ */
+function db_approve($id, $uid){
+	$query = "UPDATE follows " . 
+			 "SET approved='1'" .
+			 "WHERE followee=".$uid." and follower=".$id;
+	$result = run_sql($query);
 	return true;
 }
 

@@ -10,11 +10,7 @@ $_SESSION['id'] = 3; //Fake a session
 $_SESSION['username'] = "userA";
 
 //Query the db for the user
-$query = "SELECT * "
-	   . "FROM users "
-	   . "WHERE users.id='".$_GET['id']."'";
-$result = run_sql($query);
-$user = mysql_fetch_array($result);
+$user = db_getUserById($_GET['id']);
 $id = $user['ID'];
 $private = $user['private'];
 $first = $user['first_name'];
@@ -22,7 +18,7 @@ $last = $user['last_name'];
 $location = $user['location'];
 $bio = $user['bio'];
 $url = $user['URL'];
-$followers = getFollowers();
+$followers = db_getFollowers($id);
 
 function displayUserProfile() {
 	global $first, $last, $location, $bio, $url;
@@ -34,33 +30,15 @@ function displayUserProfile() {
 	<?php
 }
 
-function displayNewsFeed() {
+function displayUserTweets() {
 	global $id;
-	//Query the db for all tweets/PMs related to the current user
-	$query = "SELECT users.id as usr, tweets.message as msg\n"
-		   . "FROM users, tweeted, tweets\n"
-		   . "WHERE users.id=". $id ." and users.id=tweeted.userid and 
-tweeted.tid=tweets.id";
-	$result = run_sql($query);
+	$user = db_getUserById($id);
+	$name = $user['first_name'];
+	$tweets = db_getUserTweets($id);
 	//Loop through the set of tweets
-	while ( $row=mysql_fetch_array($result) ) {
-		echo "<li>@". $row['usr'] ." tweeted ". $row['msg'] ."</li>";
+	foreach ($tweets as $tweet) {
+		echo "<li>@". $name ." tweeted ". $tweet['msg'] ."</li>";
 	}
-}
-
-function getFollowers() {
-	global $id;
-	//Query the db for followers of the profiled user
-	$query = "SELECT * "
-		   . "FROM users, follows "
-		   . "WHERE followee=".$id." and users.id=follower";
-	$result = run_sql($query);
-	//Loop through the set of followers
-	$followers = array();
-	while ( $follower=mysql_fetch_array($result) ) {
-		$followers[] = $follower;
-	}
-	return $followers;
 }
 
 function displayFollowers() {
@@ -76,15 +54,11 @@ function displayFollowers() {
 
 function displayFollowing() {
 	global $id;
-	//Query the db for users that the profiled user follows
-	$query = "SELECT * "
-		   . "FROM users, follows "
-		   . "WHERE follower=".$id." and users.id=followee";
-	$result = run_sql($query);
-	//Loop through the set of followers
-	while ( $user=mysql_fetch_array($result) ) {
-		$first_name = $user['first_name'];
-		$last_name = $user['last_name'];
+	$following = db_getFollowing($id);
+	//Loop through the set of following
+	foreach ($following as $followed) {
+		$first_name = $followed['first_name'];
+		$last_name = $followed['last_name'];
 		$full_name = $first_name." ".$last_name;
 		echo "<li>@". $full_name ."</li>";
 	}
@@ -111,7 +85,7 @@ function followButton() {
 	//See if the user is even logged in
 	if ( isset($_SESSION['username']) ) {
 		//Check to see if we are already following the person.
-		if (count($followers) {
+		if (count($followers)) {
 			if (isset($_POST['unfollow'])) {
 				$user = $_SESSION['id'];
 				$person = $_GET['id'];
@@ -177,7 +151,7 @@ function followButton() {
 				<ul id="newsList">
 					<!-- This function populates the newsfeed list with elements 
 from the db -->
-					<?php displayNewsFeed(); ?>
+					<?php displayUserTweets(); ?>
 				</ul>
 			</div>
 		</div>

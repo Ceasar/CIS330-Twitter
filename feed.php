@@ -26,6 +26,19 @@ function displayNewsFeed() {
 	}
 }
 
+//Displays a user's feed.
+function displayUserFeed($id) {
+	$following = db_getFollowing($id);
+	//Loop through the set of following
+	foreach ($following as $followed) {
+		$name = $followed['first_name'];
+		$tweets = db_getUserTweets($followed['id']);
+		foreach ($tweets as $tweet) {
+			echo "<li>@". $name ." tweeted ". $tweet['msg'] ."</li>";
+		}
+	}
+}
+
 ?>
 
 <html>
