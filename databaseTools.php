@@ -99,7 +99,7 @@ function db_addTweet($user, $message, $private=false) {
 	//This creates a new tweet (The two queries need to run on the same connection for LAS_INSERT_ID() to work)
 	$queries = array();
 	$queries[] = "INSERT INTO tweets(private, message, datetime)"
-			.    "VALUES(". ($private?"TRUE":"FALSE") .",'". addslashes($_POST['message']) ."','$datetime')";
+			.    "VALUES(". ($private?"TRUE":"FALSE") .",'". addslashes($message) ."','$datetime')";
 	$queries[] = "INSERT INTO tweeted(tID, userID)"
 			.    "VALUES(LAST_INSERT_ID(),'". addslashes($user) ."')";
 	$results = run_statements($queries);
