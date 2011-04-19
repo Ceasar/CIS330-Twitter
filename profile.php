@@ -10,11 +10,7 @@ $_SESSION['id'] = 3; //Fake a session
 $_SESSION['username'] = "userA";
 
 //Query the db for the user
-$query = "SELECT * "
-	   . "FROM users "
-	   . "WHERE users.id='".$_GET['id']."'";
-$result = run_sql($query);
-$user = mysql_fetch_array($result);
+$user = db_getUserById($GET[id]);
 $id = $user['ID'];
 $private = $user['private'];
 $first = $user['first_name'];
