@@ -1,4 +1,5 @@
 <?php
+session_start();
 /* Login.php
  * ================
  * Description: 
@@ -12,11 +13,8 @@ error_reporting(E_ALL);
 //INCLUDES
 include_once("./databaseTools.php");
 
-if(!isset($_SESSION)) {session_start();}
-
 //Authenticates email and password by simply querying
 //user database. Sets session variables upon success.
-//TODO: implement some form of simple encryption
 function auth_check_login($email, $password) {
 	//database query
 	$query = "SELECT * FROM users WHERE email = '".addslashes($email)."'";
@@ -38,7 +36,9 @@ function auth_check_login($email, $password) {
 			$_SESSION['email'] = $email;
 			$_SESSION['firstname'] = $result_firstname;
 			$_SESSION['lastname'] = $result_lastname;
+			$_SESSION['username'] = $result_firstname . " " . $result_lastname;
 			$_SESSION['active'] = true;
+			echo $_SESSION['firstname'];
 			return true;
 		}
 	}
@@ -61,39 +61,64 @@ function login_failure(){
 	echo "<p align=\"center\">Need an Account?<br>
 			<a href=\"./accountCreation.php\">Register Here!</a></p>";
 }
-?>
 
-<html>
-	<title>Penn Twitter</title>
-	<link rel="stylesheet" type="text/css" href="../styles.css">
-	<link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon" /> 
-
-<body> 
-	<p align=center>
-	<?php
+function display_login(){
 	//if user is already logged in
 	if (isset($_SESSION['userid'])) {
 		echo "You are already logged in.";
-		login_success();
 	}
-	//if user is NOT logged in, verify form inputs
-	else {
-		if (isset($_POST['email'])) {
-			//success
-			if (auth_check_login($_POST['email'], $_POST['password'])) {
-				login_success();
-			}
-			//failure
-			else{
-				login_failure();
-			}
-		}
+	//if user is NOT logged in, display form
+	else {?>
+	<!-- LOGIN FORM -->
+				<form name="twitterlogin" method="post" action="<?php $PHP_SELF;?>">
+					<table class="apps_table" align=right>
+						<tr>
+							<td>Username: </td>
+							<td><input type="text" name="email"></td>
+						</tr>
+						<tr>
+							<td>Password: </td>
+							<td><input type="password" name="password"></td>
+							<td colspan=2 align="center"><input type=submit name="submit_button" value="Login"></td>
+						</tr>
+					</table>
+				</form>
+		
+	<?php }
+}
+
+?>
+
+<html>
+
+<?php include_once("./assets/templates/head.php");?>
+
+<body>
+
+<?php include_once("./assets/templates/header.php");?>
+
+<!-- Unique page content goes here. -->
+<div id="content">
+
+<?php display_login(); 
+//checks if submit button has been pressed
+if(isset($_POST['submit_button'])){
+	//checks login information
+	global $login_result;
+	$login_result = auth_check_login($_POST['email'], $_POST['password']);
+	//if login successful, redirect to profile
+	if($login_result){
+		echo '<META HTTP-EQUIV="Refresh" Content="0; URL=feed.php">';
 	}
-	?>
-	</p>
-	<br>
-		<p align=center>
-			<a href="./index.php">Return to index</a>
-		</p>
+	else{
+		echo "login unsuccessful";
+	}
+}?>
+
+</div> <!-- End Content Div -->
+
+
+<?php include_once("./assets/templates/footer.php");?>
+
 </body>
 </html>

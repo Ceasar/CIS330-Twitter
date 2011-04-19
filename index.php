@@ -1,58 +1,34 @@
-<!--This is the index page.-->
 <?php
-/* Index page
- * ================
- * Description: 
- * Contains initial login form and link to Account Creation
+/* index
+ * ==========
  */
- 
+
 //Includes:
-include_once("./databaseTools.php");
 session_start();
+include_once("./login.php");
+include_once("./databaseTools.php");
+
+//Page-specific Functions
+//-----------------------
+
 ?>
 
-<LINK REL="stylesheet" TYPE="text/css" HREF="styles.css">
-
 <html>
+<div id = "wrapper">
+<?php include_once("./assets/templates/head.php");?>
+
 <body>
-	<h1 align = center>Penn Twitter</h1>
-	<table align=center width=500 border = 3>
-		<tr>
-			<td align=center>
-		<?php
-		//if user is already logged in
-			if (isset($_SESSION['userid'])){
-		?>
-				Welcome back! | <a href="./logout.php">Log out?</a>
-		<?php
-			}
-		//if user is NOT already logged in
-			else{
-		?>
-				<!-- LOGIN FORM -->
-				<form name="twitterlogin" method="post" action="./login.php">
-					<table class="apps_table" align=right>
-						<tr>
-							<td>Username: </td>
-							<td><input type="text" name="email"></td>
-						</tr>
-						<tr>
-							<td>Password: </td>
-							<td><input type="password" name="password"></td>
-							<td colspan=2 align="center"><input type=submit value="Login"></td>
-						</tr>
-					</table>
-				</form>
-		<?php
-			}
-		?>
-			</td>
-		</tr>
-		<tr>
-			<!-- ACCOUNT REGISTRATION LINK. -->
-			<td align="center"><a href="./accountCreation.php">New User Registration</a></td>
-		</tr>
-	</table>
-	<p>NOTE: For testing purposes, input username: test@test.com , password: test</p>
+
+<?php include_once("./assets/templates/header.php");?>
+
+<!-- Unique page content goes here. -->
+<div id="content">
+
+</div> <!-- End Content Div -->
+
+
+<?php include_once("./assets/templates/footer.php");?>
+
 </body>
+</div>
 </html>

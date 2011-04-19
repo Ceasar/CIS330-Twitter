@@ -1,19 +1,16 @@
 <?php
-if(!isset($_SESSION)) {session_start();}
+session_start();
 /** 
  * logout.php: Logs a user out.
  * 
  */
-?>
-<title>Penn Twitter</title>
-<link rel="stylesheet" type="text/css" href="./styles.css">
 
-<body>
-	<br> 
+function logout(){?>
 	<div align=center>
 		<p>
 		<?php
 		if (isset($_SESSION['userid'])) {
+			
 			session_destroy();
 			echo "You have sucessfully logged out.";
 		}
@@ -25,4 +22,26 @@ if(!isset($_SESSION)) {session_start();}
 		<br>
 		<p><a href="./index.php">Return to index</a></p>
 	</div>
+<?php }
+?>
+
+<html>
+
+<?php include_once("./assets/templates/head.php");?>
+
+<body>
+
+<?php include_once("./assets/templates/header.php");?>
+
+<!-- Unique page content goes here. -->
+<div id="content">
+
+<?php logout(); ?>
+
+</div> <!-- End Content Div -->
+
+
+<?php include_once("./assets/templates/footer.php");?>
+
 </body>
+</html>
