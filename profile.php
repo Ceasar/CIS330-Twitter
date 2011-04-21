@@ -54,7 +54,7 @@ function displayUserTweets() {
 			echo "Total tweets: ".count($tweets);
 			//Loop through the set of tweets
 			foreach ($tweets as $tweet) {
-				echo "<li>@". $first ." tweeted ". $tweet['msg'] ."</li>";
+				echo "<li>@". $id ." tweeted ". $tweet['msg'] ."</li>";
 			}
 		} else {
 			echo "This user's information is private. Follow them to see their feed.";
@@ -64,7 +64,7 @@ function displayUserTweets() {
 		echo "Total tweets: ".count($tweets);
 		//Loop through the set of tweets
 		foreach ($tweets as $tweet) {
-			echo "<li>@". $first ." tweeted ". $tweet['msg'] ."</li>";
+			echo "<li>@". $id ." tweeted ". $tweet['msg'] ."</li>";
 		}
 	}
 }
