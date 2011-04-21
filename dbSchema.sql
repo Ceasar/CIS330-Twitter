@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 21, 2011 at 04:37 AM
+-- Generation Time: Apr 21, 2011 at 12:24 PM
 -- Server version: 5.5.9
 -- PHP Version: 5.3.5
 
@@ -50,8 +50,10 @@ INSERT INTO `favorites` VALUES('userA', 43);
 INSERT INTO `favorites` VALUES('heflin', 44);
 INSERT INTO `favorites` VALUES('asant', 45);
 INSERT INTO `favorites` VALUES('feigenberg', 45);
+INSERT INTO `favorites` VALUES('xerxes', 45);
 INSERT INTO `favorites` VALUES('GunzUpSwagOut', 47);
 INSERT INTO `favorites` VALUES('asant', 48);
+INSERT INTO `favorites` VALUES('wellecks', 52);
 
 -- --------------------------------------------------------
 
@@ -75,7 +77,10 @@ INSERT INTO `follows` VALUES('asant', 'asant', 0);
 INSERT INTO `follows` VALUES('asant', 'heflin', 0);
 INSERT INTO `follows` VALUES('asdf', 'userA', 0);
 INSERT INTO `follows` VALUES('heflin', 'asant', 0);
+INSERT INTO `follows` VALUES('theMan', 'xerxes', 0);
 INSERT INTO `follows` VALUES('userA', 'userB', 0);
+INSERT INTO `follows` VALUES('wellecks', 'asant', 0);
+INSERT INTO `follows` VALUES('xerxes', 'wellecks', 0);
 
 -- --------------------------------------------------------
 
@@ -192,6 +197,8 @@ INSERT INTO `messaged` VALUES(23, 'userA', 'userA');
 INSERT INTO `messaged` VALUES(24, 'userA', 'userA');
 INSERT INTO `messaged` VALUES(25, 'asant', 'heflin');
 INSERT INTO `messaged` VALUES(26, 'asant', 'asant');
+INSERT INTO `messaged` VALUES(27, 'xerxes', 'wellecks');
+INSERT INTO `messaged` VALUES(28, 'wellecks', 'asant');
 
 -- --------------------------------------------------------
 
@@ -205,7 +212,7 @@ CREATE TABLE `messages` (
   `datetime` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `ID` (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
 
 --
 -- Dumping data for table `messages`
@@ -218,6 +225,8 @@ INSERT INTO `messages` VALUES(23, 'hellyesd', '2011-03-19 03:55:22');
 INSERT INTO `messages` VALUES(24, 'jhkl', '2011-04-19 04:50:25');
 INSERT INTO `messages` VALUES(25, 'Precisely ONE communication.', '2011-06-19 06:22:11');
 INSERT INTO `messages` VALUES(26, 'helo', '2011-08-19 08:19:09');
+INSERT INTO `messages` VALUES(27, 'Hey, I think I know you.', '2011-04-21 04:52:11');
+INSERT INTO `messages` VALUES(28, 'fghjk', '2011-12-21 12:19:32');
 
 -- --------------------------------------------------------
 
@@ -279,6 +288,10 @@ INSERT INTO `tweeted` VALUES(43, 'userA');
 INSERT INTO `tweeted` VALUES(2, 'userB');
 INSERT INTO `tweeted` VALUES(5, 'userB');
 INSERT INTO `tweeted` VALUES(47, 'wellecks');
+INSERT INTO `tweeted` VALUES(52, 'wellecks');
+INSERT INTO `tweeted` VALUES(53, 'wellecks');
+INSERT INTO `tweeted` VALUES(54, 'wellecks');
+INSERT INTO `tweeted` VALUES(51, 'xerxes');
 
 -- --------------------------------------------------------
 
@@ -294,7 +307,7 @@ CREATE TABLE `tweets` (
   `datetime` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `ID` (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=55 ;
 
 --
 -- Dumping data for table `tweets`
@@ -348,6 +361,10 @@ INSERT INTO `tweets` VALUES(47, 0, 0, '@GunzUpSwagOut -- biumvirate UNITE', '201
 INSERT INTO `tweets` VALUES(48, 0, 0, '@wellecks -- biumvirate.', '2011-07-19 07:29:23');
 INSERT INTO `tweets` VALUES(49, 0, 0, 'ReTweet: GunzUpSwagOut @wellecks -- biumvirate.', '2011-08-19 08:18:22');
 INSERT INTO `tweets` VALUES(50, 0, 0, 'I love briann', '2011-08-19 08:18:27');
+INSERT INTO `tweets` VALUES(51, 0, 0, 'hey @asant, what\\''s up?', '2011-04-21 04:52:58');
+INSERT INTO `tweets` VALUES(52, 0, 0, 'hello Werld!', '2011-12-21 12:09:31');
+INSERT INTO `tweets` VALUES(53, 0, 0, 'fghj', '2011-12-21 12:18:55');
+INSERT INTO `tweets` VALUES(54, 0, 0, '#hello world', '2011-12-21 12:20:58');
 
 -- --------------------------------------------------------
 
@@ -374,45 +391,41 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
+INSERT INTO `users` VALUES('34refd', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
+INSERT INTO `users` VALUES('afer', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
 INSERT INTO `users` VALUES('asant', 'math', 'Austin', 'Santillo', 'asant@sas.upenn.edu', 0, 'English', 'I Love Math!!!!!!!!', 'New Jersey', 'http://www.math.upenn.edu', '2011-04-13');
 INSERT INTO `users` VALUES('asdf', 'asdf', 'asdf', 'asdf', 'asdf', 0, 'asdf', 'asdf', 'asdf', 'asdf', '2011-04-18');
+INSERT INTO `users` VALUES('asdf47', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
 INSERT INTO `users` VALUES('asdffasdf', 'adsfa', 'dsf', '', '', 0, '', '', '', '', '0000-00-00');
 INSERT INTO `users` VALUES('dahn_santillo', 'asdf', 'Dahn', 'Santillo', 'net@net.com', 0, 'English', 'Austin''s Long Lost Uncle', 'Alaska', 'http://aust.in', '2011-04-15');
+INSERT INTO `users` VALUES('errews', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Texas', 'http://www.google.com', '2011-04-13');
 INSERT INTO `users` VALUES('feigenberg', 'bobby', 'bobby', 'feigenberg', 'bobby@wall.street.edu', 0, 'Jewish', 'I work on Wall Street. @asant envies my intelligen', 'New Jersey', 'www.wsj.com', '2011-04-17');
+INSERT INTO `users` VALUES('gerf', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
 INSERT INTO `users` VALUES('GunzUpSwagOut', 'asdf', 'Mike Ryan', 'Cunningham', 'mike@penn.gov', 0, 'Spanish', 'Biumvirate for life.', 'Wallingford', 'http://twitter.com/TheWallingford', '2011-04-14');
 INSERT INTO `users` VALUES('heflin', 'heflin', 'Evan', 'Heflin', 'evan@evan.com', 0, 'English', 'I''m awesome.', 'Virginia', 'http://www.winning.com', '2011-04-13');
-INSERT INTO `users` VALUES('userA', 'password', 'john', 'doe', '', 0, '', '', '', '', '0000-00-00');
-INSERT INTO `users` VALUES('userB', 'password', 'jake', 'jakerson', NULL, NULL, NULL, NULL, 'texas', NULL, NULL);
-INSERT INTO `users` VALUES('wellecks', 'asdf', 'Sean', 'Welleck', 'wellecks@gmail.com', 0, 'English', 'We. created. this.', 'Texas', 'http://twitter.com/wellecks', '2011-04-18');
-INSERT INTO `users` VALUES('userC', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Texas', 'http://www.google.com', '2011-04-13');
-INSERT INTO `users` VALUES('user87h', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Texas', 'http://www.google.com', '2011-04-13');
-INSERT INTO `users` VALUES('userd', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Texas', 'http://www.google.com', '2011-04-13');
-INSERT INTO `users` VALUES('usety57', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Texas', 'http://www.google.com', '2011-04-13');
-INSERT INTO `users` VALUES('userf', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Texas', 'http://www.google.com', '2011-04-13');
-INSERT INTO `users` VALUES('userg', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Michigan', 'http://www.google.com', '2011-04-13');
-INSERT INTO `users` VALUES('xerxes', 'pass', 'Bob', 'Welleck', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Michigan', 'http://www.google.com', '2011-04-13');
-INSERT INTO `users` VALUES('usere', 'pass', 'Joseph', 'Juice', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Texas', 'http://www.google.com', '2011-04-13');
-INSERT INTO `users` VALUES('userasdf', 'pass', 'Joseph', 'yetti', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Texas', 'http://www.google.com', '2011-04-13');
-INSERT INTO `users` VALUES('user3r', 'pass', 'Joseph', 'uyasdfn', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
-INSERT INTO `users` VALUES('userasd', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
-INSERT INTO `users` VALUES('user4', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
-INSERT INTO `users` VALUES('user76', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
-INSERT INTO `users` VALUES('userkg', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
-INSERT INTO `users` VALUES('theMan', 'pass', 'Joseph', 'Welleck', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Michigan', 'http://www.google.com', '2011-04-13');
-INSERT INTO `users` VALUES('gerf', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
-INSERT INTO `users` VALUES('afer', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
-INSERT INTO `users` VALUES('34refd', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
-INSERT INTO `users` VALUES('asdf47', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
-INSERT INTO `users` VALUES('yethhfd43', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
 INSERT INTO `users` VALUES('huunmy5', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
 INSERT INTO `users` VALUES('JHUneda', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
-INSERT INTO `users` VALUES('yyruie', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
 INSERT INTO `users` VALUES('telltodp', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'TeAlaskaxas', 'http://www.google.com', '2011-04-13');
-INSERT INTO `users` VALUES('errews', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Texas', 'http://www.google.com', '2011-04-13');
-
-
-
-
+INSERT INTO `users` VALUES('theMan', 'pass', 'Joseph', 'Welleck', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Michigan', 'http://www.google.com', '2011-04-13');
+INSERT INTO `users` VALUES('user3r', 'pass', 'Joseph', 'uyasdfn', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
+INSERT INTO `users` VALUES('user4', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
+INSERT INTO `users` VALUES('user76', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
+INSERT INTO `users` VALUES('user87h', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Texas', 'http://www.google.com', '2011-04-13');
+INSERT INTO `users` VALUES('userA', 'password', 'john', 'doe', '', 0, '', '', '', '', '0000-00-00');
+INSERT INTO `users` VALUES('userasd', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
+INSERT INTO `users` VALUES('userasdf', 'pass', 'Joseph', 'yetti', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Texas', 'http://www.google.com', '2011-04-13');
+INSERT INTO `users` VALUES('userB', 'password', 'jake', 'jakerson', NULL, NULL, NULL, NULL, 'texas', NULL, NULL);
+INSERT INTO `users` VALUES('userC', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Texas', 'http://www.google.com', '2011-04-13');
+INSERT INTO `users` VALUES('userd', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Texas', 'http://www.google.com', '2011-04-13');
+INSERT INTO `users` VALUES('usere', 'pass', 'Joseph', 'Juice', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Texas', 'http://www.google.com', '2011-04-13');
+INSERT INTO `users` VALUES('userf', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Texas', 'http://www.google.com', '2011-04-13');
+INSERT INTO `users` VALUES('userg', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Michigan', 'http://www.google.com', '2011-04-13');
+INSERT INTO `users` VALUES('userkg', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
+INSERT INTO `users` VALUES('usety57', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Texas', 'http://www.google.com', '2011-04-13');
+INSERT INTO `users` VALUES('wellecks', 'asdf', 'Sean', 'Welleck', 'wellecks@gmail.com', 0, 'English', 'We. created. this.', 'Texas', 'http://twitter.com/wellecks', '2011-04-18');
+INSERT INTO `users` VALUES('xerxes', 'pass', 'Bob', 'Welleck', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Michigan', 'http://www.google.com', '2011-04-13');
+INSERT INTO `users` VALUES('yethhfd43', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
+INSERT INTO `users` VALUES('yyruie', 'pass', 'Joseph', 'Doe', 'user@sas.upenn.edu', 0, 'English', 'I am awesome!!!!!!!!', 'Alaska', 'http://www.google.com', '2011-04-13');
 
 --
 -- Constraints for dumped tables
